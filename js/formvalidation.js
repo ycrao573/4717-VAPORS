@@ -10,7 +10,6 @@ validateEmail = () => {
             return false;
         }
     }
-    alert("Please fill in your email.");
     return false;
 }
 
@@ -43,6 +42,7 @@ validateSecPwd = () => {
     var pwd = document.getElementById("password");
     var pwdSec = document.getElementById("second-password");
     if (!pwd.value || (pwdSec.value != pwd.value)) {
+        alert("Password mismatch! Please check again.");
         return false;
     }
     return true;

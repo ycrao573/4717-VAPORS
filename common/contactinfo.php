@@ -1,8 +1,7 @@
 <section class="contact">
     <div class="container">
         <div class="row">
-            <div class="qtr col"></div>
-            <div class="halfwid col">
+            <div style="margin: auto; display: block; width: 500px">
                 <div>
                     <form onsubmit="return validateEmail();" method="post">
                         <input type="hidden" name="send">
@@ -13,7 +12,7 @@
                             <label for="email">
                                 Email*<br>
                             </label>
-                            <span class="input"><input type="email" name="email" id="email" onblur="validateEmail()" placeholder="name@email.com" onblur=validateEmail() required></span>
+                            <span class="input"><input type="email" name="email" id="email" onblur="validateEmail()" placeholder="name@email.com" required></span>
                             <label for="message">
                                 Message*<br>
                             </label>
@@ -22,8 +21,7 @@
                                 Submit
                             </button>
                         </div>
-                        <span style="float: right; width: 100%"><br>We will get back to you within 3 working
-                            days.</span>
+                        <span style="float: right; width: 100%"><br>We will get back to you within 3 working days.</span>
                     </form>
                 </div>
                 <div style="line-height: 160%; float: center">
@@ -47,7 +45,7 @@
                             </tr>
                             <tr class="tablerow">
                                 <td>
-                                    Standard
+                                    Home Delivery
                                 </td>
                                 <td>
                                     $6.00

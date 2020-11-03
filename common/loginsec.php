@@ -1,11 +1,12 @@
 <section class="login">
     <div class="container">
         <div class="row">
-            <div class="qtr col"></div>
-            <div class="halfwid col">
-                <form onsubmit="return validateEmail();" method="post">
+            <div style="margin: auto; display: block; width: 400px">
+                <form onsubmit="return validateLogin();" method="post">
                     <input type="hidden" name="send">
                     <h2>Login</h2>
+                    <br><hr>
+                    <br>
                     <div>
                         <label for="email">
                             Email<br>
@@ -21,7 +22,7 @@
                         <button type="submit" class="submitbutton">
                             Login
                         </button>
-                        <span style="float: right">New to VAPORS? <a href="register.php"><span class="buttontext">Create free account</span></a></span>
+                        <span style="float: right"><br>Not A VAPORS Member?&nbsp;&nbsp;&nbsp;&nbsp;<a href="register.php"><span class="buttontext">Create a free account now!</span></a></span>
                     </div>
                 </form>
             </div>
