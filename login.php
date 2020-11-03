@@ -9,7 +9,7 @@
     include './common/navbar.php';
     if ($conn->connect_error) exit();
     echo'<br><br>';
-    include './common/registersec.php';
+    include './common/loginsec.php';
     echo'<br><br>';
     include './common/copyright.php';
     ?>
