@@ -81,6 +81,6 @@ validatePhone = () => {
 
 validateUser = () => validateEmail() && validatePwd() && validateSecPwd();
 
-validateRegister = () => validateUser() && validateName() && validatePhone();
+validateRegister = () => validateUser() && validateName();
 
 validateCheckout = () => validateName() && validatePhone() && validateAddress() && validatePostalCode();
