@@ -2,11 +2,18 @@
     <div class="container">
         <div class="row">
             <div style="margin: auto; display: block; width: 500px">
-                <form onsubmit="return validateRegister();" method="post">
-                    <input type="hidden" name="send">
+                <form method="post" id="register" onsubmit="return checkRegistration();">
+			    <input type="hidden" name="modal" value="register">    
                     <h2>Register</h2><br><hr>
                     <br>
                     <div>
+                    <label for="name">
+                            Full Name*<br>
+                        </label>
+                        <span class="input">
+                            <input type="text" name="name" id="name" placeholder="Your Full Name" onblur="validateName()">
+                        </span><br><br>
+
                         <label for="email">
                             Email*
                         </label>
@@ -18,7 +25,7 @@
                         <label for="gender">Gender*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                         <input type="radio" name="gender" value="men" id="men" />
                         <label for="gender-men">Men&nbsp;&nbsp;&nbsp;</label>
-                        <input type="radio" name="gender" id="never" value="never" />
+                        <input type="radio" name="gender" id="women" value="women" />
                         <label for="gender-women">Women</label>
                         <br><br>
 
@@ -33,7 +40,7 @@
                             Verify Your Password*<br>
                         </label>
                         <span class="input">
-                            <input type="password" name="second-password" id="second-password" placeholder="Re-enter password" onblur="validateSecPwd()" required>
+                            <input type="password" name="secondpassword" id="secondpassword" placeholder="Re-enter password" onblur="validateSecPwd()" required>
                         </span><br><br>
 
                         <label for="phone">
@@ -59,8 +66,8 @@
 
                         <span style="float: right">* Required Field<br><br></span>
 
-                        <button type="submit" class="submitbutton">
-                            Confirm Registration
+                        <button type="submit" class="submitbutton" id="confirm_registration">
+                            Register
                         </button>
                     </div>
                 </form>

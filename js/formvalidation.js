@@ -27,7 +27,7 @@ validateName = () => {
 validatePwd = () => {
     var pwd = document.getElementById("password");
     if (pwd.value.length >= 6) {
-        if (document.getElementById("second-password").value) {
+        if (document.getElementById("secondpassword").value) {
             validateSecPwd();
         }
     } else {
@@ -40,7 +40,7 @@ validatePwd = () => {
 // Password format: must be identical to the first password input.
 validateSecPwd = () => {
     var pwd = document.getElementById("password");
-    var pwdSec = document.getElementById("second-password");
+    var pwdSec = document.getElementById("secondpassword");
     if (!pwd.value || (pwdSec.value != pwd.value)) {
         alert("Password mismatch! Please check again.");
         return false;

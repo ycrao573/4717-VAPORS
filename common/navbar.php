@@ -1,4 +1,13 @@
 <div class="navright">
+<?php
+if (isset($_SESSION["name"])) {
+    echo '<a href="#" <strong>Welcome, ' .
+        $_SESSION["name"] . '</a>';
+    echo '<form name="form-signout" method="post">
+    <input type="hidden" name="user_action" value="logout">';
+}
+?>
+
     <a href="./register.php">Register</a>
     <a href="./login.php">Login</a>
     <a href="./contactus.php">Contact Us</a>

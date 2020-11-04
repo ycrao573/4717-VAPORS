@@ -8,7 +8,7 @@
                         <h2>Contact Us</h2><br>
                         <div class="modal">
                             <label for="name">Full name*</label>
-                            <input type="text" id="name" name="name" placeholder="Your Full Name" onblur=validateName() required>
+                            <span class="input"><input type="text" name="name" id="name" onblur="validateName()" placeholder="Your Full Name" required></span>
                             <label for="email">
                                 Email*<br>
                             </label>
@@ -16,7 +16,7 @@
                             <label for="message">
                                 Message*<br>
                             </label>
-                            <span class="input"><textarea name="message" id="message" rows="5" placeholder="Enter your message." required></textarea></span>
+                            <span class="input"><textarea name="message" id="message" rows="7" placeholder="Enter your message." required></textarea></span>
                             <button type="submit" class="submitbutton">
                                 Submit
                             </button>
@@ -26,8 +26,7 @@
                 </div>
                 <div style="line-height: 160%; float: center">
                     <section id="shipping">
-                        <h3><a href="#shipping" class="buttontext"><br><br><br>Shipping and
-                                Delivery</a></h3><br><br>
+                        <h3><a href="#shipping" class="buttontext"><br><br><br>Shipping Information</a></h3><br>
                         <table class="u-fill">
                             <tr class="tablerow">
                                 <th>
@@ -61,11 +60,11 @@
                             </tr>
                         </table>
                     </section>
-                    <section id="return-policy"><br><br>
-                        <h3><a href="#return-policy" class="buttontext">Return Policy</a></h3>
+                    <section id="policy"><br><br>
+                        <h3><a href="#policy" class="buttontext">Our Return Policy</a></h3><br>
                         <p>
-                            You can, within 14 days of the order being received, return any goods in saleable
-                            condition.
+                            Within 14 days of the order being received, you can return any shoes <b>in saleable
+                            condition</b>.
                         </p>
                         <p>
                             To process your return, please contact our customer center at +65 9876 5432 or

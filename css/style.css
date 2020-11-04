@@ -181,7 +181,7 @@ table {
   border-spacing: 0;
 }
 .tablerow {
-  box-shadow: 0 1px 1px 0 grey;
+  box-shadow: 0 0.8px 0 0 grey;
 }
 .tablerow th,
 .tablerow td {
