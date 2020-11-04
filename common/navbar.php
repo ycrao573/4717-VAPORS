@@ -1,19 +1,27 @@
 <div class="navright">
-<?php
-if (isset($_SESSION["name"])) {
-    echo '<a href="#" <strong>Welcome, ' .
-        $_SESSION["name"] . '</a>';
-    echo '<form name="form-signout" method="post">
-    <input type="hidden" name="user_action" value="logout">';
-}
-?>
+    <?php
+    if ($_POST["modal"] == "logout"){
+        unset($_SESSION["name"]);
+        unset($_SESSION["email"]);
+    }
 
-    <a href="./register.php">Register</a>
-    <a href="./login.php">Login</a>
+    if (isset($_SESSION["name"])) {
+        echo '<a href="#" <strong>Welcome, ' .
+            $_SESSION["name"] . '</a>';
+        echo '
+            <form class="logout" name="form-signout" method="post">
+            <input type="hidden" name="modal" value="logout">
+            <span onclick="document.forms[\'form-signout\'].submit();">
+            Log Out</span></form>';
+    } else {
+        echo '<a href="./register.php">Register</a>
+        <a href="./login.php">Login</a>';
+    }
+    ?>
     <a href="./contactus.php">Contact Us</a>
 </div>
 <div class="topnav">
-    <a href="./index.php"><img src="./pics/logo.png" width="100"></a>
+    <a href="./index.php"><img src="./pics/logo.png" width="105"></a>
     <a href="./shop-men.php">Men</a>
     <a href="./shop-women.php">Women</a>
     <a style="float: right" href="./cart.php">My Shopping Cart</a>

@@ -227,15 +227,12 @@ section input:not([type=radio]), select, textarea {
   color: black;
 }
 
-.invalid_input input {
-  border: 1px solid #cf000f;
-}
-
-.invalid_input {
-  color: #cf000f;
-}
-
-.input::after {
-  content: attr(data-attr);
-  font-size: 12px;
+.logout span {
+  overflow: hidden;
+  display: block;
+  float: right;
+  color: black;
+  padding: 7.5px 12.5px;
+  text-decoration: none;
+  font-size: 15px;
 }
