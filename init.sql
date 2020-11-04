@@ -44,7 +44,171 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `email`, `password`, `name`, `address`, `gender`, `phone`, `postal`) VALUES
-(18, 'asdf@asdf.com', 'e10adc3949ba59abbe56e057f20f883e', 'asdf', '50 NANYANG AVE', 'W', '66666666', '639798');
+(1, 'ryc@ryc.com', 'e10adc3949ba59abbe56e057f20f883e', '52 Nanyang', 'W', '66666666', '639928'),
+(2, 'asdf@asdf.com', 'e10adc3949ba59abbe56e057f20f883e', 'asdf', '50 NANYANG AVE', 'W', '66666666', '639798');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `category` char(4) NOT NULL,
+  `gender` char(1) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `price` decimal(7,2) unsigned NOT NULL,
+  `discount` float(4,2) unsigned DEFAULT '0.00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `category`, `gender`, `description`, `price`, `discount`) VALUES
+(1, 'Nike MAX 2020', 'BRD', 'M', 'Comfortable experience in casual style.', 129.90, 0.00),
+(2, 'Air RUN MAX', 'RUN', 'M', 'Running performance, at joy.', 199.90, 0.00),
+(3, 'Air ZOOMX', 'RUN', 'W', 'Running performance, at joy.', 199.90, 0.00),
+(4, 'Zebro Slipper', 'CAS', 'W', 'Casual style.', 39.90, 0.00),
+(5, 'Air JORDAN F', 'BAS', 'W', 'Beyond capable and controllable.', 399.90, 0.00),
+(6, 'Air JORDAN M', 'BAS', 'M', 'Beyond capable and controllable.', 399.90, 0.00),
+(7, 'Nike MAX SE', 'CAS', 'M', 'Mate on the ground.', 199.90, 0.00),
+(8, 'Nike ZOOM', 'RUN', 'W', 'Running performance, at joy.', 249.90, 0.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE IF NOT EXISTS `inventory` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `productID` int(10) unsigned NOT NULL,
+  `color` varchar(20) NOT NULL,
+  `size` varchar(3) NOT NULL,
+  `stock` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `productID` (`productID`,`color`,`size`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`) VALUES
+(1, 1, 'Blue', '7', 1230),
+(2, 1, 'Blue', '8', 10),
+(3, 1, 'Blue', '9', 10),
+(4, 1, 'Blue', '10', 180),
+(5, 1, 'Blue', '11', 12),
+(6, 1, 'Blue', '12', 103),
+(7, 1, 'White', '7', 12),
+(8, 1, 'White', '8', 1862),
+(9, 1, 'White', '9', 182),
+(10, 1, 'White', '10', 192),
+(11, 2, 'Brown', '6', 686),
+(12, 2, 'Brown', '7', 686),
+(13, 2, 'Brown', '8', 896),
+(14, 2, 'Brown', '9', 6332),
+(15, 2, 'Brown', '10', 6865),
+(16, 2, 'White', '6', 6526),
+(17, 2, 'White', '7', 638),
+(18, 2, 'White', '8', 6634),
+(19, 2, 'White', '9', 686),
+(20, 2, 'White', '10', 6),
+(21, 3, 'Black', '6', 686),
+(22, 3, 'Black', '7', 686),
+(23, 3, 'Black', '8', 896),
+(24, 3, 'Black', '9', 6332),
+(25, 3, 'Black', '10', 6865),
+(26, 3, 'White', '6', 6526),
+(27, 3, 'White', '7', 638),
+(28, 3, 'White', '8', 6634),
+(29, 3, 'White', '9', 686),
+(30, 3, 'White', '10', 6),
+(31, 4, 'Black', '6', 686),
+(32, 4, 'Black', '7', 686),
+(33, 4, 'Black', '8', 896),
+(34, 4, 'Black', '9', 6333),
+(35, 4, 'Black', '10', 6865),
+(36, 4, 'White', '6', 6536),
+(37, 4, 'White', '7', 638),
+(38, 4, 'White', '8', 6634),
+(39, 4, 'White', '9', 686),
+(40, 4, 'White', '10', 6),
+(41, 5, 'Black', '6', 686),
+(42, 5, 'Black', '7', 686),
+(43, 5, 'Black', '8', 896),
+(44, 5, 'Black', '9', 6333),
+(45, 5, 'Black', '10', 6865),
+(46, 5, 'Orange', '6', 6536),
+(47, 5, 'White', '7', 638),
+(48, 5, 'Orange', '8', 6634),
+(49, 5, 'White', '9', 686),
+(50, 5, 'Orange', '10', 6),
+(51, 6, 'Blue', '6', 686),
+(52, 6, 'Blue', '7', 686),
+(53, 6, 'Blue', '8', 896),
+(54, 6, 'Blue', '9', 6333),
+(55, 6, 'Blue', '10', 6865),
+(56, 6, 'Blue', '10.', 6536),
+(57, 6, 'Blue', '11.', 638),
+(58, 6, 'Blue', '12', 6634),
+(59, 6, 'Blue', '13', 686),
+(60, 6, 'Blue', '13.', 6),
+(71, 7, 'Brown', '6', 686),
+(72, 7, 'Brown', '7', 686),
+(73, 7, 'Brown', '8', 896),
+(74, 7, 'Brown', '9', 6333),
+(75, 7, 'Brown', '10', 6865),
+(76, 7, 'Pink', '6', 6536),
+(77, 7, 'Pink', '7', 638),
+(78, 7, 'Pink', '8', 6634),
+(79, 7, 'Pink', '9', 686),
+(80, 7, 'Pink', '10', 6),
+(81, 8, 'White', '6', 686),
+(82, 8, 'White', '7', 686),
+(83, 8, 'White', '8', 896),
+(84, 8, 'White', '9', 6333),
+(85, 8, 'White', '10', 6865),
+(86, 8, 'Pink', '6', 6536),
+(87, 8, 'Pink', '7', 638),
+(88, 8, 'Pink', '8', 6634),
+(89, 8, 'Pink', '9', 686),
+(90, 8, 'Pink', '10', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE IF NOT EXISTS `carts` (
+  `cartId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `accountId` int(10) unsigned NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `category` char(4) NOT NULL,
+  `gender` char(1) NOT NULL,
+  `price` decimal(7,2) unsigned NOT NULL,
+  `discount` float(4,2) unsigned DEFAULT '0.00',
+  `quantity` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, 'quantity') VALUES
+(1, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 0.00, 2),
+(2, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 10.00, 2),
+(2, 1, 'Nike ZOOM', 'RUN', 'W',  129.90, 0.00, 2);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
