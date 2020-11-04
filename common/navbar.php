@@ -14,8 +14,8 @@ if (isset($_SESSION["name"])) {
 </div>
 <div class="topnav">
     <a href="./index.php"><img src="./pics/logo.png" width="100"></a>
-    <a href="./shop-men.php">Men</a>
-    <a href="./shop-women.php">Women</a>
+    <a href="./shop.php">Men</a>
+    <a href="./shop.php">Women</a>
     <a style="float: right" href="./cart.php">My Shopping Cart</a>
     <div class="search-container">
         <form action="/shop.php">
