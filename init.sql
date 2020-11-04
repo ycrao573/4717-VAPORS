@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `email`, `password`, `name`, `address`, `gender`, `phone`, `postal`) VALUES
-(1, 'ryc@ryc.com', 'e10adc3949ba59abbe56e057f20f883e', '52 Nanyang', 'W', '66666666', '639928'),
-(2, 'asdf@asdf.com', 'e10adc3949ba59abbe56e057f20f883e', 'asdf', '50 NANYANG AVE', 'W', '66666666', '639798');
+(1, 'ryc@ryc.com', 'e10adc3949ba59abbe56e057f20f883e', 'Yuchen','52 Nanyang', 'W', '66666666', '639928'),
+(2, 'asdf@asdf.com', 'e10adc3949ba59abbe56e057f20f883e', 'Liangyu', '50 NANYANG AVE', 'W', '66666666', '639798');
 
 -- --------------------------------------------------------
 
@@ -188,7 +188,8 @@ INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `carts` (
-  `cartId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cartId` int(10) unsigned NOT NULL,
   `accountId` int(10) unsigned NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `category` char(4) NOT NULL,
@@ -196,18 +197,17 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `price` decimal(7,2) unsigned NOT NULL,
   `discount` float(4,2) unsigned DEFAULT '0.00',
   `quantity` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, 'quantity') VALUES
-(1, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 0.00, 2),
-(2, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 10.00, 2),
-(2, 1, 'Nike ZOOM', 'RUN', 'W',  129.90, 0.00, 2);
+INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`) VALUES
+(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 0.00, 2),
+(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 10.00, 2),
+(3, 2, 1, 'Nike ZOOM', 'RUN', 'W',  129.90, 0.00, 2);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

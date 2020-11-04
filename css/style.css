@@ -1,241 +1,323 @@
 * {
-  font-family: "Georgia";
-  box-sizing: border-box;
-  margin: 0;
+    font-family: "Georgia";
+    box-sizing: border-box;
+    margin: 0;
 }
 
 body {
-  font-family: "Georgia";
-  color: black;
-  background-color: whitesmoke;
-  box-sizing: border-box;
+    font-family: "Georgia";
+    color: black;
+    background-color: whitesmoke;
+    box-sizing: border-box;
+}
+
+
+/* flex container by default */
+
+.container {
+    max-width: 100% !important;
+    display: flex;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.row {
+    width: 100% !important;
+    flex-direction: row;
+    padding: 0;
+    position: relative;
+    justify-content: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.column {
+    flex-wrap: wrap;
+    display: flex;
+    vertical-align: top;
+    position: relative;
+    padding: 0 1rem;
+    flex-wrap: wrap;
 }
 
 .topnav {
-  overflow: hidden;
-  background-color: #e9e9e9;
+    overflow: hidden;
+    background-color: #e9e9e9;
 }
 
 .topnav a {
-  float: left;
-  display: block;
-  color: black;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+    float: left;
+    display: block;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 .topnav a:hover {
-  background-color: #dddddd;
-  color: black;
+    background-color: #dddddd;
+    color: black;
 }
 
 .topnav .search-container {
-  float: right;
+    float: right;
 }
 
 .topnav input {
-  padding: 7.5px;
-  margin-top: 7.5px;
-  font-size: 16px;
-  border: none;
+    padding: 7.5px;
+    margin-top: 7.5px;
+    font-size: 16px;
+    border: none;
 }
 
 .topnav .search-container button {
-  float: right;
-  border: none;
-  padding: 7px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: corn;
-  font-size: 17px;
-  cursor: pointer;
+    float: right;
+    border: none;
+    padding: 7px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: corn;
+    font-size: 17px;
+    cursor: pointer;
 }
 
 .topnav .search-container button:hover {
-  background: lightgrey;
+    background: lightgrey;
 }
 
 .navright {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .navright a {
-  display: block;
-  float: right;
-  color: black;
-  padding: 7.5px 12.5px;
-  text-decoration: none;
-  font-size: 15px;
+    display: block;
+    float: right;
+    color: black;
+    padding: 7.5px 12.5px;
+    text-decoration: none;
+    font-size: 15px;
 }
 
 .navright a:hover {
-  background-color: #ddd;
-  color: black;
+    background-color: #ddd;
+    color: black;
 }
 
 .navright a.active {
-  background-color: #2196f3;
-  color: white;
+    background-color: #2196f3;
+    color: white;
 }
+
 .hero {
-  margin: 0;
+    margin: 0;
 }
 
 .homepic_half {
-  display: flex;
-  width: 50%;
-  height: calc(100vh - 156px);
+    display: flex;
+    width: 50%;
+    height: calc(100vh - 156px);
 }
 
 .homepic_half_woman {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("./homepics/woman.jpg");
-  background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("./homepics/woman.jpg");
+    background-position: right;
 }
+
 .homepic_half_man {
-  background-repeat: no-repeat;
-  background-image: url("./homepics/man.jpg");
-  background-position: left;
-  background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("./homepics/man.jpg");
+    background-position: left;
+    background-size: cover;
 }
 
 .homepic_button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bolder;
-  margin: auto;
-  letter-spacing: 4px;
-  background: #6969699a;
-  color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    margin: auto;
+    letter-spacing: 4px;
+    background: #6969699a;
+    color: whitesmoke;
 }
 
 #herobutton {
-  color: white;
-  text-align: center;
-  padding: 19px 23px;
-  text-decoration: none;
-  font-size: 18px;
-  border-radius: 8px;
+    color: white;
+    text-align: center;
+    padding: 19px 23px;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 8px;
 }
 
 #herobutton:hover {
-  background-color: cornsilk;
-  color: black;
+    background-color: cornsilk;
+    color: black;
 }
 
 .container {
-  display: flex !important;
-  max-width: 100%;
-  margin: auto;
+    display: flex !important;
+    max-width: 100%;
+    margin: auto;
 }
+
 .row {
-  display: flex;
-  align-items: stretch;
-  width: 100%;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
 }
+
 .col {
-  padding: 2px;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  vertical-align: top;
+    padding: 2px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    vertical-align: top;
 }
+
 .col.qtr {
-  width: 25%;
+    width: 25%;
 }
+
 .col.onethird {
-  width: 33%;
+    width: 33%;
 }
+
 .col.five {
-  width: 41.6%;
+    width: 41.6%;
 }
+
 .col.halfwid {
-  width: 50%;
+    width: 50%;
 }
+
 .col.full {
-  width: 100%;
+    width: 100%;
 }
+
 .col.centered {
-  text-align: center;
+    text-align: center;
 }
+
 .footer {
-  line-height: 1em;
-  padding: 1.5rem 0;
-  background: #012;
-  color: #ccc;
-  margin-top: 3rem;
+    line-height: 1em;
+    padding: 1.5rem 0;
+    background: #012;
+    color: #ccc;
+    margin-top: 3rem;
 }
+
 .footer__copyright {
-  font-size: 0.875rem;
-  justify-self: flex-end;
-  flex: 1;
-  text-align: center;
+    font-size: 0.875rem;
+    justify-self: flex-end;
+    flex: 1;
+    text-align: center;
 }
+
 .contact {
-  margin: 3rem 0;
-  padding: 2rem 0;
+    margin: 3rem 0;
+    padding: 2rem 0;
 }
+
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
+
 .tablerow {
-  box-shadow: 0 0.8px 0 0 grey;
+    box-shadow: 0 0.8px 0 0 grey;
 }
+
 .tablerow th,
 .tablerow td {
-  padding: 0.8rem 0.6rem;
-  text-align: left;
+    padding: 0.8rem 0.6rem;
+    text-align: left;
 }
+
+
+/* button style for index page */
+
+.button:hover {
+    color: #0099e6;
+}
+
 .buttontext {
-  color: inherit;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.1s ease-out;
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.1s ease-out;
 }
+
 .buttontext:hover {
-  text-decoration: none;
-  color: #678;
+    text-decoration: none;
+    color: #678;
 }
 
-section input:not([type=radio]), select, textarea {
-  font-size: 105%;
-  width: 100% !important;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
+.button_large {
+    padding: 1rem 1.5rem;
 }
 
-.submitbutton{
-  display: block;
-  width: 100%;
-  border: none;
-  background-color: grey;
-  color: white;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
+.button_primary {
+    background: #006699;
+    color: whitesmoke;
 }
+
+.button_primary:hover {
+    background: #0099e6;
+    color: white;
+}
+
+.button_secondary {
+    background: #dddeef;
+    color: black;
+}
+
+.button_secondary:hover {
+    color: inherit;
+    background: rgba(221, 222, 239, 0.75);
+}
+
+section input:not([type=radio]),
+select,
+textarea {
+    font-size: 105%;
+    width: 100% !important;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.submitbutton {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: grey;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
 .submitbutton:hover {
-  background-color: #ddd;
-  color: black;
+    background-color: #ddd;
+    color: black;
 }
 
 .invalid_input input {
-  border: 1px solid #cf000f;
+    border: 1px solid #cf000f;
 }
 
 .invalid_input {
-  color: #cf000f;
+    color: #cf000f;
 }
 
 .input::after {
-  content: attr(data-attr);
-  font-size: 12px;
+    content: attr(data-attr);
+    font-size: 12px;
 }

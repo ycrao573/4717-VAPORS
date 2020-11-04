@@ -114,10 +114,10 @@
 				?>
 			</div>
 		</div>
-		<button type="submit" class="button button--primary option__button">
+		<button type="submit" class="button button_primary option__button">
 			Apply Filters
 		</button>
-		<button type="reset" class="button button--secondary option__button">
+		<button type="reset" class="button button_secondary option__button">
 			Clear All
 		</button>
 	</form>
