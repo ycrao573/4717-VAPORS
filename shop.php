@@ -11,10 +11,10 @@
     ?>
     <div class="container">
         <div class="row">
-            <div class="three column">
+            <div style="width: 40%; float: left">
                 <?php include './common/filter.php' ?>
             </div>
-            <div class="nine column">
+            <div>
                 <?php
                     $product_query = "SELECT p.id, p.name, p.price, p.discount FROM products AS p, stock AS s WHERE p.id=s.productsID";
 
@@ -37,20 +37,20 @@
                     }
                     $product_query = $product_query . ' GROUP BY p.id;';
                     // echo $product_query;
-                    $connection_success = $conn->query($product_query);
+                    $product_res = $conn->query($product_query);
 
-                    if ($connection_success) {
-                        $row_number = $connection_success->num_rows;
+                    if ($product_res) {
+                        $row_number = $product_res->num_rows;
                         if ($row_number > 0) {
                             echo '<div class="row">';
                             $section_id = "collection--search";
-                            for ($counter = 0; $counter < $row_number; $counter++) {
-                                $row = $connection_success->fetch_assoc();
+                            for ($i = 0; $i < $row_number; $i++) {
+                                $row = $product_res->fetch_assoc();
                                 $product_id = $row["id"];
                                 $product_name = $row["name"];
                                 $product_price = $row["price"];
                                 $product_discount = $row["discount"];
-                                echo '<div class="four column">';
+                                echo '<div class="onethird col">';
                                 include './common/product.php';
                                 echo '</div>';
                             }

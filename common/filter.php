@@ -1,123 +1,184 @@
-<section class="sidebar">
+<section class="sidebar" style="margin: 25px; padding: 20px; border-radius: 20px; background-color: lightgrey; max-width: 350px;">
 	<form class="filter">
-		<div class="user-m-medium--bottom">
-			<h2 class="header">Filter</h2>
-		</div>
-		<div id="option--gender" class="option-group">
-			<div class="option__header">
-				<h4>Gender</h4>
+		<div>
+			<h2>Filter</h2>
+		</div><br>
+		<div id="option-gender">
+			<div>
+				<h4>Gender</h4><hr><br>
 			</div>
-			<?php
-			$gender = array(
-				'men'   => 'Men',
-				'women' => 'Women'
-			);
-			foreach ($gender as $gender => $gender_string) {
-				echo '
-						<label for="gender--' . $gender . '" class="label label--checkbox">
-							<input type="checkbox" name="gender[]" value="' . $gender_string[0] . '" class="input--checkbox" id="gender--' . $gender . '">
-							' . $gender_string . '
-						</label>
-					';
-			}
-			?>
-		</div>
-		<div id="option--gender" class="option-group">
-			<div class="option__header">
-				<h4>Size</h4>
+			<label for="gender-men" class="label-filter">
+				<input type="checkbox" name="gender[]" value="M" id="gender-men">
+				Men
+			</label>
+			<label for="gender-women" class="label-filter">
+				<input type="checkbox" name="gender[]" value="W" id="gender-women">
+				Women
+			</label>
+		</div><br>
+		<div id="option-type">
+			<div>
+				<h4>Type</h4><hr><br>
 			</div>
-			<div class="row">
-				<?php
-				$size = array(
-					'6' => '6',
-					'6.5' => '6.5',
-					'7'  => '7',
-					'7.5'  => '7.5',
-					'8'   => '8',
-					'8.5'   => '8.5',
-					'9'   => '9',
-					'9.5'   => '9.5',
-					'10.5'   => '10.5',
-					'10.5'   => '10.5',
-					'11'   => '11',
-					'11.5'   => '11.5',
-					'12'   => '12',
-					'13.5'   => '13.5'
-				);
-				foreach ($size as $size => $size_string) {
-					echo '
-							<div class="three column user-p-zero">
-								<label for="size--' . $size . '" class="label label--checkbox">
-									<input type="checkbox" name="size[]" value="' . $size_string . '" class="input--checkbox" id="size--' . $size . '">
-									' . $size_string . '
-								</label>
-							</div>
-						';
-				}
-				?>
-			</div>
-        </div>
-        <div id="option--type" class="option-group">
-			<div class="option__header">
-				<h4>Catefory</h4>
-			</div>
-			<?php
-			$category = array(
-				'RUN'     => 'Running',
-				'BAS'   => 'Basketball',
-				'CAS'   => 'Casual',
-				'BRD'   => 'Board',
-				'FOO'     => 'Football',
-				'TRA'     => 'Training',
-			);
-			/**
-			 * adjust key value pair and checkbox visibility
-			 * depending on option--gender
-			 */
-			foreach ($category as $category => $category_string) {
-				echo '
-						<label for="category--' . $category . '" class="label label--checkbox">
-							<input type="checkbox" name="category[]" value="' . $category . '" class="input--checkbox" id="category--' . $category . '">
-							' . $category_string . '
-						</label>
-					';
-			}
-			?>
-		</div>
-		<div id="option--color" class="option-group">
-			<div class="option__header">
-				<h4>Color</h4>
+
+			<label for="category-RUN" class="label-filter">
+				<input type="checkbox" name="category[]" value="RUN" class="input-checkbox" id="category-RUN">
+				Running
+			</label>
+
+			<label for="category-BAS" class="label-filter">
+				<input type="checkbox" name="category[]" value="BAS" class="input-checkbox" id="category-BAS">
+				Basketball
+			</label>
+
+			<label for="category-CAS" class="label-filter">
+				<input type="checkbox" name="category[]" value="CAS" class="input-checkbox" id="category-CAS">
+				Casual
+			</label>
+
+			<label for="category-BRD" class="label-filter">
+				<input type="checkbox" name="category[]" value="BRD" class="input-checkbox" id="category-BRD">
+				Board
+			</label>
+
+			<label for="category-FOO" class="label-filter">
+				<input type="checkbox" name="category[]" value="FOO" class="input-checkbox" id="category-FOO">
+				Football
+			</label>
+		</div><br>
+
+		<div id="option-size">
+			<div>
+				<h4>Size</h4><hr><br>
 			</div>
 			<div class="row">
-				<?php
-				$color = array(
-					'black'  => 'Black',
-					'blue'   => 'Blue',
-					'brown'   => 'Brown',
-					'green'  => 'Green',
-					'grey'   => 'Grey',
-					'orange' => 'Orange',
-					'pink'   => 'Pink',
-					'red'    => 'Red',
-					'white'  => 'White'
-				);
-				foreach ($color as $color => $color_string) {
-					echo '
-							<div class="six column user-p-zero">
-								<label for="color--' . $color . '" class="label label--checkbox">
-									<input type="checkbox" name="color[]"  value="' . $color_string . '" class="input--checkbox" id="color--' . $color . '">
-									' . $color_string . '
-								</label>
-							</div>
-						';
-				}
-				?>
+				<div class="onethird col">
+					<label for="size-6" class="label-filter">
+						<input type="checkbox" name="size[]" value="6" class="input-checkbox" id="size-6">
+						6
+					</label>
+				</div>
+				<div class="onethird col">
+					<label for="size-7" class="label-filter">
+						<input type="checkbox" name="size[]" value="7" class="input-checkbox" id="size-7">
+						7
+					</label>
+				</div>
+				<div class="onethird col">
+					<label for="size-8" class="label-filter">
+						<input type="checkbox" name="size[]" value="8" class="input-checkbox" id="size-8">
+						8
+					</label>
+				</div>
+				<div class="onethird col">
+					<label for="size-9" class="label-filter">
+						<input type="checkbox" name="size[]" value="9" class="input-checkbox" id="size-9">
+						9
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="size-10" class="label-filter">
+						<input type="checkbox" name="size[]" value="10" class="input-checkbox" id="size-10">
+						10
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="size-11" class="label-filter">
+						<input type="checkbox" name="size[]" value="11" class="input-checkbox" id="size-11">
+						11
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="size-12" class="label-filter">
+						<input type="checkbox" name="size[]" value="12" class="input-checkbox" id="size-12">
+						12
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="size-13" class="label-filter">
+						<input type="checkbox" name="size[]" value="13" class="input-checkbox" id="size-13">
+						13
+					</label>
+				</div>
 			</div>
-		</div>
-		<button type="submit" class="button button--primary option__button">
+		</div><br>
+		<div id="option-color">
+			<div>
+				<h4>Color</h4><hr><br>
+			</div>
+			<div class="row">
+
+				<div class="onethird col">
+					<label for="color-black" class="label-filter">
+						<input type="checkbox" name="color[]" value="Black" class="input-checkbox" id="color-black">
+						Black
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-blue" class="label-filter">
+						<input type="checkbox" name="color[]" value="Blue" class="input-checkbox" id="color-blue">
+						Blue
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-brown" class="label-filter">
+						<input type="checkbox" name="color[]" value="Brown" class="input-checkbox" id="color-brown">
+						Brown
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-green" class="label-filter">
+						<input type="checkbox" name="color[]" value="Green" class="input-checkbox" id="color-green">
+						Green
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-grey" class="label-filter">
+						<input type="checkbox" name="color[]" value="Grey" class="input-checkbox" id="color-grey">
+						Grey
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-orange" class="label-filter">
+						<input type="checkbox" name="color[]" value="Orange" class="input-checkbox" id="color-orange">
+						Orange
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-pink" class="label-filter">
+						<input type="checkbox" name="color[]" value="Pink" class="input-checkbox" id="color-pink">
+						Pink
+					</label>
+				</div>
+
+				<div class="onethird col">
+					<label for="color-red" class="label-filter">
+						<input type="checkbox" name="color[]" value="Red" class="input-checkbox" id="color-red">
+						Red
+					</label>
+				</div>
+				<div class="onethird col">
+					<label for="color-white" class="label-filter">
+						<input type="checkbox" name="color[]" value="White" class="input-checkbox" id="color-white">
+						White
+					</label>
+				</div>
+			</div>
+		</div><br>
+		<button type="submit" class="submitbutton">
 			Apply Filters
 		</button>
-		<button type="reset" class="button button--secondary option__button">
+		<button type="reset" class="resetbutton">
 			Clear All
 		</button>
 	</form>

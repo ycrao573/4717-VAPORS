@@ -14,7 +14,7 @@
                             <h2>Register</h2><br><hr>
                             <br>
                             <div>
-                            <label for="name">
+                                <label for="name">
                                     Full Name*<br>
                                 </label>
                                 <span class="input">
@@ -78,8 +78,6 @@
                                 </button>
                             </div>
                         </form>
-                        
-                        
                         ';
                     }?>
             </div>

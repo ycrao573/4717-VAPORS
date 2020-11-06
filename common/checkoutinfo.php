@@ -1,1 +1,0 @@
-<!-- Checkout Info: Checkout Page with invoice inside -->

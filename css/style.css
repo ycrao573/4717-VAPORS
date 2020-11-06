@@ -4,11 +4,17 @@
   margin: 0;
 }
 
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Georgia";
   color: black;
   background-color: whitesmoke;
   box-sizing: border-box;
+  flex-direction: column;
 }
 
 .topnav {
@@ -125,17 +131,23 @@ body {
 }
 
 .container {
-  display: flex !important;
-  max-width: 100%;
-  margin: auto;
-}
-.row {
   display: flex;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: inherit;
   align-items: stretch;
-  width: 100%;
+  width: 100% !important;
+  padding: 0;
 }
 .col {
-  padding: 2px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -199,19 +211,20 @@ table {
   color: #678;
 }
 
-section input:not([type=radio]), select, textarea {
+section input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
   font-size: 105%;
   width: 100% !important;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   resize: vertical;
 }
 
-.submitbutton{
+.submitbutton {
   display: block;
   width: 100%;
   border: none;
@@ -223,8 +236,19 @@ section input:not([type=radio]), select, textarea {
   text-align: center;
 }
 .submitbutton:hover {
-  background-color: #ddd;
+  background-color: darkgray;
   color: black;
+}
+
+.resetbutton {
+  display: block;
+  width: 100%;
+  border: none;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .logout span {
@@ -235,4 +259,20 @@ section input:not([type=radio]), select, textarea {
   padding: 7.5px 12.5px;
   text-decoration: none;
   font-size: 15px;
+}
+
+.option-group {
+  margin-bottom: 1rem;
+}
+
+.label-filter {
+  margin: 0;
+  display: block;
+  padding-left: 1.75em;
+  text-indent: -1.75em;
+  cursor: pointer;
+}
+
+.label-filter:not(:nth-last-of-type(1)) {
+  margin-bottom: 6px;
 }

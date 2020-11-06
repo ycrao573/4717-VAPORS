@@ -22,11 +22,11 @@
 </div>
 <div class="topnav">
     <a href="./index.php"><img src="./pics/logo.png" width="105"></a>
-    <a href="./shop.php">Men</a>
-    <a href="./shop.php">Women</a>
+    <a href="./shop.php?gender[]=M">Men</a>
+    <a href="./shop.php?gender[]=W">Women</a>
     <a style="float: right" href="./cart.php">My Shopping Cart</a>
     <div class="search-container">
-        <form action="/shop.php">
+        <form action="./shop.php">
             <input type="text" placeholder="Search for your shoes!" name="search">
             <button type="submit">Search</button>
         </form>

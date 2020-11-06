@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2020 at 08:36 PM
+-- Generation Time: Nov 06, 2020 at 09:00 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -44,40 +44,36 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `email`, `password`, `name`, `address`, `gender`, `phone`, `postal`) VALUES
-(1, 'ryc@ryc.com', 'e10adc3949ba59abbe56e057f20f883e', '52 Nanyang', 'W', '66666666', '639928'),
-(2, 'asdf@asdf.com', 'e10adc3949ba59abbe56e057f20f883e', 'asdf', '50 NANYANG AVE', 'W', '66666666', '639798');
+(1, 'ryc@ryc.com', 'e10adc3949ba59abbe56e057f20f883e', 'Yuchen', '52 Nanyang', 'W', '66666666', '639928'),
+(2, 'asdf@asdf.com', 'e10adc3949ba59abbe56e057f20f883e', 'Liangyu', '50 NANYANG AVE', 'W', '66666666', '639798');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Table structure for table `carts`
 --
 
-CREATE TABLE IF NOT EXISTS `products` (
+CREATE TABLE IF NOT EXISTS `carts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `cartId` int(10) unsigned NOT NULL,
+  `accountId` int(10) unsigned NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `category` char(4) NOT NULL,
   `gender` char(1) NOT NULL,
-  `description` varchar(500) NOT NULL,
   `price` decimal(7,2) unsigned NOT NULL,
   `discount` float(4,2) unsigned DEFAULT '0.00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  `quantity` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `products`
+-- Dumping data for table `carts`
 --
 
-INSERT INTO `products` (`id`, `name`, `category`, `gender`, `description`, `price`, `discount`) VALUES
-(1, 'Nike MAX 2020', 'BRD', 'M', 'Comfortable experience in casual style.', 129.90, 0.00),
-(2, 'Air RUN MAX', 'RUN', 'M', 'Running performance, at joy.', 199.90, 0.00),
-(3, 'Air ZOOMX', 'RUN', 'W', 'Running performance, at joy.', 199.90, 0.00),
-(4, 'Zebro Slipper', 'CAS', 'W', 'Casual style.', 39.90, 0.00),
-(5, 'Air JORDAN F', 'BAS', 'W', 'Beyond capable and controllable.', 399.90, 0.00),
-(6, 'Air JORDAN M', 'BAS', 'M', 'Beyond capable and controllable.', 399.90, 0.00),
-(7, 'Nike MAX SE', 'CAS', 'M', 'Mate on the ground.', 199.90, 0.00),
-(8, 'Nike ZOOM', 'RUN', 'W', 'Running performance, at joy.', 249.90, 0.00);
+INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`) VALUES
+(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 0.00, 2),
+(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 10.00, 2),
+(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 129.90, 0.00, 2);
 
 -- --------------------------------------------------------
 
@@ -159,7 +155,6 @@ INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`) VALUES
 (57, 6, 'Blue', '11.', 638),
 (58, 6, 'Blue', '12', 6634),
 (59, 6, 'Blue', '13', 686),
-(60, 6, 'Blue', '13.', 6),
 (71, 7, 'Brown', '6', 686),
 (72, 7, 'Brown', '7', 686),
 (73, 7, 'Brown', '8', 896),
@@ -184,31 +179,34 @@ INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `carts`
+-- Table structure for table `products`
 --
 
-CREATE TABLE IF NOT EXISTS `carts` (
-  `cartId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `accountId` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `category` char(4) NOT NULL,
   `gender` char(1) NOT NULL,
+  `description` varchar(500) NOT NULL,
   `price` decimal(7,2) unsigned NOT NULL,
   `discount` float(4,2) unsigned DEFAULT '0.00',
-  `quantity` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
--- Dumping data for table `carts`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, 'quantity') VALUES
-(1, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 0.00, 2),
-(2, 1, 'Nike MAX 2020', 'BRD', 'M',  129.90, 10.00, 2),
-(2, 1, 'Nike ZOOM', 'RUN', 'W',  129.90, 0.00, 2);
-
+INSERT INTO `products` (`id`, `name`, `category`, `gender`, `description`, `price`, `discount`) VALUES
+(1, 'Nike MAX 2020', 'BRD', 'M', 'Comfortable experience in casual style.', 129.90, 0.00),
+(2, 'Air RUN MAX', 'RUN', 'M', 'Running performance, at joy.', 199.90, 0.00),
+(3, 'Air ZOOMX', 'RUN', 'W', 'Running performance, at joy.', 199.90, 0.00),
+(4, 'Zebro Slipper', 'CAS', 'W', 'Casual style.', 39.90, 0.00),
+(5, 'Air JORDAN F', 'BAS', 'W', 'Beyond capable and controllable.', 399.90, 0.00),
+(6, 'Air JORDAN M', 'BAS', 'M', 'Beyond capable and controllable.', 399.90, 0.00),
+(7, 'Nike MAX SE', 'CAS', 'M', 'Mate on the ground.', 199.90, 0.00),
+(8, 'Nike ZOOM', 'RUN', 'W', 'Running performance, at joy.', 249.90, 0.00);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
