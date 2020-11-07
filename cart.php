@@ -10,7 +10,7 @@
     if ($conn->connect_error) exit();
     include './common/copyright.php';
 
-    echo '<a href="./checkout.php"><button class="submitbutton">Go to Checkout</button></a>'
+    echo '<a href="./checkout.php"><button class="submitbutton" style="max-width: 200px; float: right;">Go to Checkout</button></a>'
     ?>
 </body>
 </html>
