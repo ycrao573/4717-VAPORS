@@ -16,7 +16,7 @@
             </div>
             <div>
                 <?php
-                    $product_query = "SELECT p.id, p.name, p.price, p.discount FROM products AS p, stock AS s WHERE p.id=s.productsID";
+                    $product_query = "SELECT p.id, p.name, p.price, p.discount FROM products AS p, inventory AS i WHERE p.id=i.productID";
 
                     foreach ($_GET as $category_key => $category_value_arr) {
                         // TODO: change condition here
@@ -36,7 +36,7 @@
                         }
                     }
                     $product_query = $product_query . ' GROUP BY p.id;';
-                    // echo $product_query;
+                    echo $product_query;
                     $product_res = $conn->query($product_query);
 
                     if ($product_res) {
