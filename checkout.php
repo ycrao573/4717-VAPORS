@@ -93,7 +93,6 @@
 
                         </div>
                     </div>
-
                     <div class="col" style="float: right; width: 30px"></div>
                     <div class="col" style="float: right; display: block; width: 400px; margin: 25px">
                         <button type="submit" class="submitbutton" id="confirm_checkout">
