@@ -28,6 +28,7 @@
                             <th>Subtotal</th>
                         </tr>';
 
+
                     
     $current_email = $_SESSION["email"];
     $qry = 'SELECT * FROM carts WHERE email = '. '\'' . $current_email . '\'';
@@ -52,7 +53,7 @@
             $subtotal = $prices_per_item * $quantity;
             $total += $subtotal;
 
-            echo '<tr class="table__row">
+            echo '<tr class="tablerow">
                                       <td>';
             echo '<img src="./pics/' . $id . '_' . $color . '.jpg" class="cart__thumbnail">';
             echo '    </td>
@@ -68,13 +69,15 @@
                 number_format($subtotal, 2) . '
                                       </span></strong></td>
                                   </tr>';
+
         }
 
     }
+    echo '</table>';
     ?>
     </div>
     </div>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br>
     <a href="./checkout.php"><button class="submitbutton" style="max-width: 200px; float: right;">Go to Checkout</button></a>
     </form>
     <br><br><br><br>
