@@ -23,10 +23,55 @@
                             <th>Size</th>
                             <th>Item</th>
                             <th>Price</th>
+                            <th>Discount</th>
                             <th>Quantity</th>
                             <th>Subtotal</th>
-                        </tr>
-                    </table>';
+                        </tr>';
+
+                    
+    $current_email = $_SESSION["email"];
+    $qry = 'SELECT * FROM carts WHERE email = '. '\'' . $current_email . '\'';
+    $qry = $qry . ' AND paid = 0';
+    $qry = $qry . ' ORDER BY name, color, size';
+    $qry = $qry . ';';
+    echo $qry;
+    $query_result = $conn->query($qry);
+    $row_no = $query_result->num_rows;
+    if ($row_no > 0) {
+        for ($counter = 0; $counter < $row_no; $counter++) {
+            $row = $query_result->fetch_assoc();
+            $gender = $row["gender"];
+            $name = $row["name"];
+            $color = $row["color"];
+            $size = $row["size"];
+            $price = $row["price"];
+            $discount = $row["discount"];
+            $quantity = $row["quantity"];
+            
+            $prices_per_item = (1 - $discount / (float)100) * $price;
+            $subtotal = $prices_per_item * $quantity;
+            $total += $subtotal;
+
+            echo '<tr class="table__row">
+                                      <td>';
+            echo '<img src="./pics/' . $id . '_' . $color . '.jpg" class="cart__thumbnail">';
+            echo '    </td>
+            <td>' . $gender . '</td>
+            <td>' . $name . '</td>
+            <td>' . ucfirst($color) . '</td>
+            <td>' . $size . '</td>
+            <td id="' . $id . '_' . $color . '_' . $size . '_price-single">$' . number_format($prices_per_item, 2) . '</td>
+            <td>' . $discount . '%</td>
+            <td>' . $quantity . '</td>
+            <td>' . $subtotal . '</td>'
+            ;
+            echo '<td class="user-align--right"><strong>$<span class="price-subtotal" id="' . $id . '_' . $color . '_' . $size . '_price-subtotal">' .
+                number_format($subtotal, 2) . '
+                                      </span></strong></td>
+                                  </tr>';
+        }
+
+    }
     ?>
     </div>
     </div>
