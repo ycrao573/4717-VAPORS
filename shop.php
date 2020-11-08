@@ -69,7 +69,6 @@
 
     </div>
     <?php
-    include './common/homepage.php';
     include './common/copyright.php';
     ?>
 </body>
