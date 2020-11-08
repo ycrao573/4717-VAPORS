@@ -429,3 +429,9 @@ textarea {
 .product__color--pink {
   background: rgb(240, 139, 215);
 }
+
+.product-thumbnails {
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  display: flex;
+}
