@@ -16,24 +16,21 @@
     $input_id = $_GET["id"];
     $add_to_cart = isset($_GET["add"]);
 
+
     if (!$input_id) {
         $add_to_cart = false;
         $input_id = 1;
     }
-    
-    $qry = 'SELECT * FROM accounts WHERE email = ' . $current_email . ';';
-    $query_result = $conn->query($qry);
 
-    if($query_result) {
-        $row_no = $query_result->num_rows;
-        $row = $query_result->fetch_assoc();
-        $current_id = $row["id"];
-    }
+    $qry = 'SELECT * FROM accounts WHERE email = "' . $current_email . '";';
+    $query_result = $conn->query($qry);
+    $row_no = $query_result->num_rows;
+    $row = $query_result->fetch_assoc();
+    $current_id = $row["id"];
 
     $qry = 'SELECT p.name, p.price, p.gender, p.category, p.discount, p.description, i.color, i.size, i.stock FROM products AS p, inventory AS i 	
-WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
+WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
     $query_result = $conn->query($qry);
-
     if ($query_result) {
         $row_no = $query_result->num_rows;
         if ($row_no > 0) {
@@ -73,7 +70,6 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
             $category = $row["category"];
             $description = stripslashes($row["description"]);
 
-
             if (!$input_color || !in_array($input_color, $distinct_color)) {
                 // default display the 1st color
                 $input_color = $distinct_color[0];
@@ -110,59 +106,61 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
 
             //Add selected product to cart
             if ($add_to_cart) {
-                $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.description, c.quantity, c.paid FROM carts AS c 	
+                $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.quantity, c.paid FROM carts AS c 	
                 WHERE c.accountId = ' . $current_id . ' AND c.paid = 0 LIMIT 1;';
                 $query_result = $conn->query($qry);
-                    if ($query_result) {
-                        $row_no = $query_result->num_rows;
-                        $row = $query_result->fetch_assoc();
-                        $cartId = $row["cartId"];
-                        // Exists active shopping cart
-                        $qry = 'UPDATE carts SET quantity = quantity + ' . $input_quantity . 'WHERE accountId = ' . $current_id . ' AND cartId = '. $cartId . ' AND paid = 0' . ' AND name = '. $name . ';';
-                        $query_result = $conn->query($qry);
-                        if(!$query_result) {
-                            // if product not in active cart
-                            $qry = 'INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`, `paid`) VALUES (';
-                            $qry = $qry . $cartId . ', ';
-                            $qry = $qry . $current_id . ', ';
-                            $qry = $qry . '\'' . $name . '\'' . ', ';
-                            $qry = $qry . '\'' . $category . '\'' . ', ';
-                            $qry = $qry . $price . ', ';
-                            $qry = $qry . $discount . ', ';
-                            $qry = $qry . $input_quantity . ', ';
-                            $qry = $qry . '0);';
-                        }
-                    } else {
-                        // Add new shopping cart
-                        $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.description, c.quantity, c.paid FROM carts AS c 	
-                                WHERE c.accountId = ' . $current_id . ' AND c.paid = 1 ORDER BY c.cartId DESC;';
-                        $query_result = $conn->query($qry);
-                        if($query_result) {
-                            $row_no = $query_result->num_rows;
-                            $row = $query_result->fetch_assoc();
-                            $last_cartId = $row["cartId"];
-                            $cartId = $last_cartId + 1;
-                        } else {
-                            $cartId = 1;
-                        }
-
-                        $qry = 'U INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`, `paid`) VALUES (';
+                if ($query_result) {
+                    $row_no = $query_result->num_rows;
+                    $row = $query_result->fetch_assoc();
+                    $cartId = $row["cartId"];
+                    // Exists active shopping cart
+                    $qry = 'UPDATE carts SET quantity = quantity + ' . $input_quantity . ' WHERE accountId = ' . $current_id . ' AND cartId = ' . $cartId . ' AND paid = 0' . ' AND name = "' . $name . '";';
+                    $query_result = $conn->query($qry);
+                    $updated = $conn->affected_rows;
+                    echo $updated;
+                    if (!$updated) {
+                        // if product not in active cart
+                        $qry = 'INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`, `paid`) VALUES (';
                         $qry = $qry . $cartId . ', ';
                         $qry = $qry . $current_id . ', ';
                         $qry = $qry . '\'' . $name . '\'' . ', ';
                         $qry = $qry . '\'' . $category . '\'' . ', ';
+                        $qry = $qry . '\'' . $gender . '\'' . ', ';
                         $qry = $qry . $price . ', ';
                         $qry = $qry . $discount . ', ';
                         $qry = $qry . $input_quantity . ', ';
                         $qry = $qry . '0);';
                         $query_result = $conn->query($qry);
-                        if($query_result) {
-                            echo 'Create cart success.';
-                        }                         
                     }
-            }
+                } else {
+                    // Add new shopping cart
+                    $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.description, c.quantity, c.paid FROM carts AS c 	
+                                WHERE c.accountId = ' . $current_id . ' ORDER BY c.cartId DESC;';
+                    $query_result = $conn->query($qry);
+                    if ($query_result) {
+                        $row_no = $query_result->num_rows;
+                        $row = $query_result->fetch_assoc();
+                        $last_cartId = $row["cartId"];
+                        $cartId = $last_cartId + 1;
+                    } else {
+                        $cartId = 1;
+                    }
 
-            include './common/navbar.php';
+                    $qry = 'INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`, `paid`) VALUES (';
+                    $qry = $qry . $cartId . ', ';
+                    $qry = $qry . $current_id . ', ';
+                    $qry = $qry . '\'' . $name . '\'' . ', ';
+                    $qry = $qry . '\'' . $category . '\'' . ', ';
+                    $qry = $qry . $price . ', ';
+                    $qry = $qry . $discount . ', ';
+                    $qry = $qry . $input_quantity . ', ';
+                    $qry = $qry . '0);';
+                    $query_result = $conn->query($qry);
+                    if ($query_result) {
+                        echo 'Create cart success.';
+                    }
+                }
+            }
 
             //Product preview and thumbnails
             $section_id = 'product-details';
@@ -292,4 +290,5 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
     include './common/copyright.php';
     ?>
 </body>
+
 </html>

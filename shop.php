@@ -66,7 +66,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <?php
     include './common/copyright.php';
