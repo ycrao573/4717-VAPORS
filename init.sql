@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 06, 2020 at 09:00 PM
+-- Generation Time: Nov 09, 2020 at 01:07 AM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `postal` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `accounts`
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `quantity` int(10) unsigned NOT NULL,
   `paid` int(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `carts`
@@ -76,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `carts` (
 INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `color`, `size`, `price`, `discount`, `quantity`, `paid`) VALUES
 (1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 0.00, 2, 0),
 (2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 10.00, 2, 0),
-(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 'White', 9, 129.90, 0.00, 2, 0);
+(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 'White', 9, 129.90, 0.00, 2, 0),
+(17, 1, 1, 'Air JORDAN M', 'BAS', 'M', 'Blue', 10, 399.90, 0.00, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`) VALUES
-(1, 1, 'Blue', '7', 1230),
+(1, 1, 'Blue', '7', 0),
 (2, 1, 'Blue', '8', 10),
 (3, 1, 'Blue', '9', 10),
 (4, 1, 'Blue', '10', 180),
