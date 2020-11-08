@@ -16,7 +16,7 @@
             <div class="col" style="width: 30%; max-width: 400px; min-width: 265px;">
                 <?php include './common/filter.php' ?>
             </div>
-            <div class="col" style="width: 67%; float: right; padding: 20px; margin-left: 18px">
+            <div class="col" style="width: 67%; padding: 20px; margin-left: 18px;">
                 <?php
                     $product_query = "SELECT p.id, p.name, p.price, p.discount FROM products AS p, inventory AS i WHERE p.id=i.productID";
 
@@ -38,7 +38,6 @@
                         }
                     }
                     $product_query = $product_query . ' GROUP BY p.id;';
-                    echo $product_query;
                     $product_res = $conn->query($product_query);
                     if ($product_res) {
                         $row_number = $product_res->num_rows;
