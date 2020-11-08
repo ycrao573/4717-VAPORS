@@ -46,6 +46,7 @@
         for ($counter = 0; $counter < $row_no; $counter++) {
             $row = $query_result->fetch_assoc();
             $name = $row["name"];
+            $id = $row["id"];
             $gender = $row["gender"];
             $color = $row["color"];
             $size = $row["size"];
@@ -59,7 +60,7 @@
 
             echo '<tr class="table__row">
                                       <td>';
-            echo '<img src="./pics/' . $id . '_' . $color . '.jpg" class="cart__thumbnail">';
+            echo '<img src="./pics/' . $id . '_' . strtolower($color) . '.jpg" class="cart__thumbnail">';
             echo '    </td>
             <td>' . $name . '</td>
             <td>' . ucfirst($color) . '</td>
