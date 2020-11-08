@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `price` decimal(7,2) unsigned NOT NULL,
   `discount` float(4,2) unsigned DEFAULT '0.00',
   `quantity` int(10) unsigned NOT NULL,
+  `paid` int(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -70,10 +71,10 @@ CREATE TABLE IF NOT EXISTS `carts` (
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`) VALUES
-(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 0.00, 2),
-(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 10.00, 2),
-(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 129.90, 0.00, 2);
+INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`, `paid`) VALUES
+(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 0.00, 2, 0),
+(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 10.00, 2, 0),
+(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 129.90, 0.00, 2, 0);
 
 -- --------------------------------------------------------
 
