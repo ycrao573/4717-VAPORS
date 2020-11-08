@@ -82,7 +82,8 @@
         }
 
     }
-    echo '</table>';
+    echo '</table>
+    <h4 class="header"><strong>Total $<span id="total-price">' . number_format($total, 2) . '</span></strong></h4>';
     ?>
     </div>
     </div>
