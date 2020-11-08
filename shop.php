@@ -21,9 +21,8 @@
                     $product_query = "SELECT p.id, p.name, p.price, p.discount FROM products AS p, inventory AS i WHERE p.id=i.productID";
 
                     foreach ($_GET as $category_key => $category_value_arr) {
-                        // TODO: change condition here
-                        if ($category_key != 'tag' && $category_key != 'price--min' && $category_key != 'price--max') {
-                            $product_query = $product_query . ' AND (';
+                        if ($category_key != 'tag') {
+                            $product_query = $product_query . ' AND ';
                             $item_1 = true;
                             foreach ($category_value_arr as $category_value) {
                                 if ($item_1) {
@@ -34,8 +33,11 @@
                                     $product_query = $product_query . ' OR ' . $category_key . '="' . $category_value . '"';
                                 }
                             }
-                            $product_query = $product_query . ')';
                         }
+                    }
+
+                    if (isset($_GET["search"])) {
+                        $product_query .= ' p.name LIKE "%' . $_GET["search"] . '%"';
                     }
                     $product_query = $product_query . ' GROUP BY p.id;';
                     $product_res = $conn->query($product_query);

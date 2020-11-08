@@ -115,7 +115,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     // Exists active shopping cart
                     $qry = 'UPDATE carts SET quantity = quantity + ' . $input_quantity . ' WHERE accountId = ' . $current_id . ' AND cartId = ' . $cartId . ' AND paid = 0';
                     $qry = $qry . ' AND name = ' . '\'' . $name . '\'';
-                    $qry = $qry . ' AND lower(color) = ' . '\'' . ucfirst($input_color) . '\'';
+                    $qry = $qry . ' AND color = ' . '\'' . ucfirst($input_color) . '\'';
                     $qry = $qry . ' AND gender = ' . '\'' . $gender . '\'';
                     $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
                     $qry = $qry . ';';
@@ -188,7 +188,6 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                 } else {
                     echo '<div class="product-thumbnails">';
                 }
-
                 $button_id = $section_id . '_button_' . $input_id . '_' . $color_name;
                 echo '  <input type="image" id="' . $button_id . '" src="./pics/' . $input_id . '_' . $color_name . '.jpg" width="100%" onclick="pickColor(this)">
                           </div>';
