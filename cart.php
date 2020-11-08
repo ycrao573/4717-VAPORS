@@ -30,8 +30,13 @@
 
 
                     
-    $current_email = $_SESSION["email"];
-    $qry = 'SELECT * FROM carts WHERE email = '. '\'' . $current_email . '\'';
+    $qry = 'SELECT * FROM accounts WHERE email = '. '\'' . $_SESSION['email'] . '\'';
+    $query_result = $conn->query($qry);
+    $row_no = $query_result->num_rows;
+    $row = $query_result->fetch_assoc();
+    $current_id = $row["id"];    
+
+    $qry = 'SELECT * FROM carts WHERE accountId = '. '\'' . $current_id . '\'';
     $qry = $qry . ' AND paid = 0';
     $qry = $qry . ' ORDER BY name, color, size';
     $qry = $qry . ';';
@@ -62,8 +67,7 @@
             <td>' . $size . '</td>
             <td id="' . $id . '_' . $color . '_' . $size . '_price-single">$' . number_format($prices_per_item, 2) . '</td>
             <td>' . $discount . '%</td>
-            <td>' . $quantity . '</td>
-            <td>' . $subtotal . '</td>'
+            <td>' . $quantity . '</td>'
             ;
             echo '<td class="user-align--right"><strong>$<span class="price-subtotal" id="' . $id . '_' . $color . '_' . $size . '_price-subtotal">' .
                 number_format($subtotal, 2) . '
