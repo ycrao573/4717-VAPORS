@@ -60,6 +60,8 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `name` varchar(100) DEFAULT NULL,
   `category` char(4) NOT NULL,
   `gender` char(1) NOT NULL,
+  `color` varchar(10) NOT NULL,
+  `size` float(2,1) unsigned NOT NULL,
   `price` decimal(7,2) unsigned NOT NULL,
   `discount` float(4,2) unsigned DEFAULT '0.00',
   `quantity` int(10) unsigned NOT NULL,
@@ -71,10 +73,10 @@ CREATE TABLE IF NOT EXISTS `carts` (
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `price`, `discount`, `quantity`, `paid`) VALUES
-(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 0.00, 2, 0),
-(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 129.90, 10.00, 2, 0),
-(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 129.90, 0.00, 2, 0);
+INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `color`, `size`, `price`, `discount`, `quantity`, `paid`) VALUES
+(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 0.00, 2, 0),
+(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 10.00, 2, 0),
+(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 'White', 9, 129.90, 0.00, 2, 0);
 
 -- --------------------------------------------------------
 
