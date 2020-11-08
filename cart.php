@@ -28,8 +28,6 @@
                             <th>Subtotal</th>
                         </tr>';
 
-
-                    
     $qry = 'SELECT * FROM accounts WHERE email = '. '\'' . $_SESSION['email'] . '\'';
     $query_result = $conn->query($qry);
     $row_no = $query_result->num_rows;
@@ -55,6 +53,7 @@
             $gender = $row["gender"];
             $color = $row["color"];
             $size = $row["size"];
+            echo $size;
             $price = $row["price"];
             $discount = $row["discount"];
             $quantity = $row["quantity"];
@@ -87,7 +86,7 @@
     ?>
     </div>
     </div>
-    <br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br>
     <a href="./checkout.php"><button class="submitbutton" style="max-width: 200px; float: right;">Go to Checkout</button></a>
     </form>
     <br><br><br><br>

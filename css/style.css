@@ -331,31 +331,28 @@ textarea {
   background: black;
 }
 
-.product__image {
-  margin-bottom: 1rem;
-}
-
 .product__image img {
   width: 100%;
 }
 
 .product__name {
-  margin-bottom: 0.5rem;
   overflow: hidden;
 }
 
 .product__name a {
-  color: inherit;
+  text-decoration: none;
+  color: #001122;
+  font-size: 120%;
+  margin-bottom: 2px;
 }
 
 .product__price {
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
   align-items: center;
 }
 
 .product__price--current {
-  margin-right: 0.5rem;
-  color: #006699;
+  color: #666;
 }
 
 .product__price--pre-discount {

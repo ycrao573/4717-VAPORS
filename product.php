@@ -189,7 +189,6 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                 } else {
                     echo '<div class="product-thumbnails">';
                 }
-
                 $button_id = $section_id . '_button_' . $input_id . '_' . $color_name;
                 echo '  <input type="image" id="' . $button_id . '" src="./pics/' . $input_id . '_' . $color_name . '.jpg" width="100%" onclick="pickColor(this)">
                           </div>';
