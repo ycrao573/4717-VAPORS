@@ -19,9 +19,9 @@
                     <table style="width: 80%; min-width: 900px; margin: auto;">
                         <tr class="tablerow">
                             <th>Image</th>
+                            <th>Item</th>
                             <th>Color</th>
                             <th>Size</th>
-                            <th>Item</th>
                             <th>Price</th>
                             <th>Discount</th>
                             <th>Quantity</th>
@@ -40,8 +40,8 @@
     if ($row_no > 0) {
         for ($counter = 0; $counter < $row_no; $counter++) {
             $row = $query_result->fetch_assoc();
-            $gender = $row["gender"];
             $name = $row["name"];
+            $gender = $row["gender"];
             $color = $row["color"];
             $size = $row["size"];
             $price = $row["price"];
@@ -56,7 +56,6 @@
                                       <td>';
             echo '<img src="./pics/' . $id . '_' . $color . '.jpg" class="cart__thumbnail">';
             echo '    </td>
-            <td>' . $gender . '</td>
             <td>' . $name . '</td>
             <td>' . ucfirst($color) . '</td>
             <td>' . $size . '</td>
