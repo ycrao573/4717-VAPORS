@@ -17,8 +17,8 @@
         <div class="product__price--current">
             <h2 class="header">
                 <?php
-                $discountprice = (1 - $product_discount / (float)100) * $product_price;
-                echo '$' . number_format($discountprice, 2);
+                $discounted_price = (1 - $product_discount / (float)100) * $product_price;
+                echo '$' . number_format($discounted_price, 2);
                 ?>
             </h2>
         </div>

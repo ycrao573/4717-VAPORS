@@ -69,9 +69,9 @@
 
             $qry .= '");';
             echo $qry;
-            $res = $conn->query($qry);
+            $query_result = $conn->query($qry);
 
-            if (!$res || $conn->affected_rows != 1) {
+            if (!$query_result || $conn->affected_rows != 1) {
                 $flagReg = false;
             }
         }

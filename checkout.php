@@ -25,9 +25,9 @@
                                 $islogin = true;
                                 $email = $_SESSION["email"];
                                 $qry = 'SELECT * FROM accounts AS a WHERE a.email ="' . $email . '";';
-                                $res = $conn->query($qry);
+                                $query_result = $conn->query($qry);
 
-                                $account = $res->fetch_assoc();
+                                $account = $query_result->fetch_assoc();
 
                                 $id = $account['id'];
                                 $name = $account['name'];
@@ -36,7 +36,7 @@
                                 $phone = $account["phone"];
                                 $postal = $account["postal"];
                 
-                                $res->free();
+                                $query_result->free();
                             }
                             echo '
                             <label for="name">
