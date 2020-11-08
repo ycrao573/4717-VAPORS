@@ -1,4 +1,4 @@
-<div class="product">
+<div class="product" style="margin-right: 12%">
     <div class="row product__image">
         <?php
         echo '<a href="./product.php?id=' . $product_id . '" class="user-flex">';
