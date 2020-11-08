@@ -398,10 +398,6 @@ textarea {
   background: #cbccdf;
 }
 
-.product__color--red {
-  background: #e2000f;
-}
-
 .product__color--orange {
   background: #e79806;
 }
@@ -410,20 +406,9 @@ textarea {
   background: #f1ee07;
 }
 
-.product__color--brown {
-  background: hsla(47, 100%, 47%, 0.555);
-}
-
-.product__color--green {
-  background: #19b158;
-}
 
 .product__color--blue {
   background: #064686;
-}
-
-.product__color--purple {
-  background: rgb(75, 37, 114);
 }
 
 .product__color--pink {
@@ -434,4 +419,9 @@ textarea {
   margin-bottom: 0.5rem;
   cursor: pointer;
   display: flex;
+}
+
+.cart-thumbnail {
+  width: 64px;
+  display: block;
 }

@@ -16,7 +16,6 @@
     $input_id = $_GET["id"];
     $add_to_cart = isset($_GET["add"]);
 
-
     if (!$input_id) {
         $add_to_cart = false;
         $input_id = 1;
@@ -40,7 +39,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             $inventory_array = array();
 
             //Inventory array
-            for ($counter = 0; $counter < $row_no; $counter++) {
+            for ($i = 0; $i < $row_no; $i++) {
                 $row = $query_result->fetch_assoc();
                 $stock = $row["stock"];
                 $color = strtolower($row["color"]);
@@ -98,11 +97,11 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                 }
             }
 
-            echo '  <script type="text/javascript">
-                            var inventory_arr = ' . json_encode($inventory_array) . ';
-                            var selectedColor = "' . $input_color . '";
-                            var selectedSize = "' . $input_size . '";
-                        </script>';
+            // echo '  <script type="text/javascript">
+            //                 var inventory_arr = ' . json_encode($inventory_array) . ';
+            //                 var selectedColor = "' . $input_color . '";
+            //                 var selectedSize = "' . $input_size . '";
+            //             </script>';
 
             //Add selected product to cart
             if ($add_to_cart) {
@@ -116,9 +115,9 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     // Exists active shopping cart
                     $qry = 'UPDATE carts SET quantity = quantity + ' . $input_quantity . ' WHERE accountId = ' . $current_id . ' AND cartId = ' . $cartId . ' AND paid = 0';
                     $qry = $qry . ' AND name = ' . '\'' . $name . '\'';
-                    $qry = $qry . ' AND lower(color) = ' . '\'' . $color . '\'';
+                    $qry = $qry . ' AND lower(color) = ' . '\'' . ucfirst($input_color) . '\'';
                     $qry = $qry . ' AND gender = ' . '\'' . $gender . '\'';
-                    $qry = $qry . ' AND size = ' . '\'' . $size . '\'';
+                    $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
                     $qry = $qry . ';';
                     $query_result = $conn->query($qry);
                     echo $qry;
@@ -132,8 +131,8 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                         $qry = $qry . '\'' . $name . '\'' . ', ';
                         $qry = $qry . '\'' . $category . '\'' . ', ';
                         $qry = $qry . '\'' . $gender . '\'' . ', ';
-                        $qry = $qry . '\'' . $color . '\'' . ', ';
-                        $qry = $qry . $size . ', ';
+                        $qry = $qry . '\'' . ucfirst($input_color) . '\'' . ', ';
+                        $qry = $qry . $input_size . ', ';
                         $qry = $qry . $price . ', ';
                         $qry = $qry . $discount . ', ';
                         $qry = $qry . $input_quantity . ', ';
@@ -263,7 +262,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             //Container for quantity input + submit button
             echo ' <div class="option--quantity" id="option--quantity"' . ($stockout ? ' style="display:none;"' : '') . '>
 							<div>Quantity</div>
-							<input type="number" min="1" max="' . $inventory_array[$input_color][$input_size] . '" name="quantity" class="input--text" id="product-quantity" value="' . ($input_quantity > 0 ? $input_quantity : 1) . '" oninput="updatePriceProduct(this)">
+							<input type="number" min="1" max="' . $inventory_array[$input_color][$input_size] . '" name="quantity" class="input--text" id="product-quantity" value="' . ($input_quantity > 0 ? $input_quantity : 1) . '">
 						</div>
 						<button type="submit" class="submitbutton"' . ($stockout ? ' style="display:none;"' : '') . '>
 							Add to Cart
@@ -275,17 +274,13 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             echo ' <div class="onethird col">
                             <div class="product-info">
                                 <div class="product-info__name">
-                                    <h4 class="header">' . $name . '</h4>
+                                    <h2>' . $name . '</h2><br>
                                 </div>
-                                <div class="product-info__id">
+                                <div>
                                     Product ID: ' . $input_id . '
                                 </div>
                                 <div class="product-info__price">
                                     <span class="product-info__price--current" id="product-price-single">$' . number_format($discounted_price, 2) . '</span>';
-
-            if ($product_discount > 0) {
-                echo ' <span class="product-info__price--pre-discount">$' . number_format($price, 2) . '</span>';
-            }
 
             echo '          </div>
                                 <div class="product-info__description">' .

@@ -47,6 +47,10 @@
         for ($counter = 0; $counter < $row_no; $counter++) {
             $row = $query_result->fetch_assoc();
             $name = $row["name"];
+            $qry = 'SELECT p.id from products AS p where name = "'.$name .'"';
+            $res = $conn->query($qry);
+            $prod = $res->fetch_assoc();
+            // $productid = ($conn->query($qry)->fetch_assoc())["id"];
             $id = $row["id"];
             $gender = $row["gender"];
             $color = $row["color"];
@@ -61,7 +65,7 @@
 
             echo '<tr class="tablerow">
                                       <td>';
-            echo '<img src="./pics/' . $id . '_' . strtolower($color) . '.jpg" class="cart__thumbnail">';
+            echo '<img src="./pics/' . $prod["id"] . '_' . strtolower($color) . '.jpg" class="cart-thumbnail">';
             echo '    </td>
             <td>' . $name . '</td>
             <td>' . ucfirst($color) . '</td>
@@ -70,10 +74,10 @@
             <td>' . $discount . '%</td>
             <td>' . $quantity . '</td>'
             ;
-            echo '<td class="user-align--right"><strong>$<span class="price-subtotal" id="' . $id . '_' . $color . '_' . $size . '_price-subtotal">' .
+            echo '<td ><strong>$<span class="price-subtotal" id="' . $id . '_' . $color . '_' . $size . '_price-subtotal">' .
                 number_format($subtotal, 2) . '
-                                      </span></strong></td>
-                                  </tr>';
+                                    </span></strong></td>
+                                </tr>';
 
         }
 
