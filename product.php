@@ -59,22 +59,25 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
             $discount = $row["discount"];
             $price = $row["price"];
             $discounted_price = (1 - $product_discount / (float)100) * $price;
-            $description = stripslashes($row["description"]);
             $gender = $row["gender"];
             $category = $row["category"];
+            $description = stripslashes($row["description"]);
 
 
             if (!$input_color || !in_array($input_color, $distinct_color)) {
+                // default display the 1st color
                 $input_color = $distinct_color[0];
                 $add_to_cart = false;
             }
 
             if (!$input_size || !in_array($input_size, $distinct_size)) {
+                // default display the 1st size
                 $input_size = $distinct_size[0];
                 $add_to_cart = false;
             }
 
             if (!$input_quantity || $input_quantity < 1) {
+                // default quantity is 1
                 $input_quantity = 1;
                 $add_to_cart = false;
             }
@@ -119,6 +122,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
                                 <div class="row">
                                     <div class="one column user-p-zero--right">';
 
+            // Display color picker
             foreach ($distinct_color as $color_name) {
                 if ($color_name == $input_color) {
                     echo '<div class="product-thumbnails product-thumbnails--active">';
@@ -233,18 +237,9 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productsID ORDER BY i.color ASC;';
                     </div>
                 </div>
             </section>';
-        } else {
-            //ProductID does not belong to database
-            include './common/navbar.php';
-            exit();
         }
-    } else {
-        //Unable to query database for product information
-        include './common/navbar.php';
-        exit();
     }
     $conn->close();
-    include './common/homepage.php';
     include './common/copyright.php';
     ?>
 </body>
