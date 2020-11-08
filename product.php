@@ -70,39 +70,34 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             $description = stripslashes($row["description"]);
 
             if (!$input_color || !in_array($input_color, $distinct_color)) {
-                // default display the 1st color
+                // default display color
                 $input_color = $distinct_color[0];
                 $add_to_cart = false;
             }
 
             if (!$input_size || !in_array($input_size, $distinct_size)) {
-                // default display the 1st size
+                // default display size
                 $input_size = $distinct_size[0];
                 $add_to_cart = false;
             }
 
             if (!$input_quantity || $input_quantity < 1) {
-                // default quantity is 1
+                // default quantity
                 $input_quantity = 1;
                 $add_to_cart = false;
             }
 
             $stockout = false;
 
-            if (!isset($inventory_array[$input_color][$input_size]) || $input_quantity > $inventory_array[$input_color][$input_size]) {
+            if ($input_quantity > $inventory_array[$input_color][$input_size]
+                ||!$inventory_array[$input_color][$input_size]) {
                 $input_quantity = $inventory_array[$input_color][$input_size];
                 if ($input_quantity < 1) {
                     $stockout = true;
                     $add_to_cart = false;
                 }
             }
-
-            // echo '  <script type="text/javascript">
-            //                 var inventory_arr = ' . json_encode($inventory_array) . ';
-            //                 var selectedColor = "' . $input_color . '";
-            //                 var selectedSize = "' . $input_size . '";
-            //             </script>';
-
+            
             //Add selected product to cart
             if ($add_to_cart) {
                 $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.quantity, c.paid FROM carts AS c 	
@@ -266,23 +261,20 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 						<button type="submit" class="submitbutton"' . ($stockout ? ' style="display:none;"' : '') . '>
 							Add to Cart
 						</button>
-						<span class="submitbutton" id="button--outofstock"' . ($stockout ? '' : ' style="display:none;"') . '>Out of Stock</span>
+						<span class="submitbutton"' . ($stockout ? '' : ' style="display:none;"') . '>Out of Stock</span>
 					</form>
 				</div>';
             //Display product information
             echo ' <div class="onethird col">
                             <div class="product-info">
-                                <div class="product-info__name">
+                                <div>
                                     <h2>' . $name . '</h2><br>
                                 </div>
                                 <div>
-                                    Product ID: ' . $input_id . '
-                                </div>
-                                <div class="product-info__price">
-                                    <span class="product-info__price--current" id="product-price-single">$' . number_format($discounted_price, 2) . '</span>';
+                                    <h2>$' . number_format($discounted_price, 2) . '</h2>';
 
             echo '          </div>
-                                <div class="product-info__description">' .
+                                <div class="product-info__description"><br>' .
                 nl2br($description) .
                 '</div>
                             </div>

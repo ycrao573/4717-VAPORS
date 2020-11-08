@@ -27,7 +27,6 @@
                             <th>Quantity</th>
                             <th>Subtotal</th>
                         </tr>';
-
     $qry = 'SELECT * FROM accounts WHERE email = '. '\'' . $_SESSION['email'] . '\'';
     $query_result = $conn->query($qry);
     $row_no = $query_result->num_rows;
@@ -42,22 +41,39 @@
     $query_result = $conn->query($qry);
     $row_no = $query_result->num_rows;
     if ($row_no > 0) {
-        for ($counter = 0; $counter < $row_no; $counter++) {
+        for ($i = 0; $i < $row_no; $i++) {
             $row = $query_result->fetch_assoc();
+            
             $name = $row["name"];
             $qry = 'SELECT p.id from products AS p where name = "'.$name .'"';
             $res = $conn->query($qry);
             $prod = $res->fetch_assoc();
-            // $productid = ($conn->query($qry)->fetch_assoc())["id"];
             $id = $row["id"];
             $gender = $row["gender"];
             $color = $row["color"];
             $size = $row["size"];
-            echo $size;
             $price = $row["price"];
             $discount = $row["discount"];
-            $quantity = $row["quantity"];
             
+            $query = 'SELECT stock
+            FROM inventory WHERE
+            productID = ' . $prod["id"] . '
+            AND color ="' . $color .'"
+            AND size=' . $size . '
+            ;';
+            $result = $conn->query($query);
+            $stockres = $result->fetch_assoc();
+            
+            $quantity = min($stockres["stock"], $row["quantity"]);
+
+            $conn->query('UPDATE carts SET quantity =
+                        '. $quantity .' WHERE id = '. $id .';');
+            
+            if(!$quantity){
+                $conn->query('DELETE from carts WHERE id = '. $id .'');
+                continue;
+            }
+
             $prices_per_item = (1 - $discount / (float)100) * $price;
             $subtotal = $prices_per_item * $quantity;
             $total += $subtotal;
@@ -77,7 +93,6 @@
                 number_format($subtotal, 2) . '
                                     </span></strong></td>
                                 </tr>';
-
         }
 
     }
