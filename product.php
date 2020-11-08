@@ -165,14 +165,14 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             //Product preview and thumbnails
             $section_id = 'product-details';
             echo '	<section id="' . $section_id . '" class="product-details">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="one column user-p-zero--right">';
+                            <div class="container" style="margin: 25px">
+                                <div class="row" style="margin: 25px">
+                                    <div class="col" style="width: 8%; display: block">';
 
             // Display color picker
             foreach ($distinct_color as $color_name) {
                 if ($color_name == $input_color) {
-                    echo '<div class="product-thumbnails product-thumbnails--active">';
+                    echo '<div class="product-thumbnails">';
                 } else {
                     echo '<div class="product-thumbnails">';
                 }
@@ -184,30 +184,34 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 
             //Container for color input
             echo '  </div>
-                        <div class="four column">
+                        <div class="onethird col">
                             <div class="product-preview">
                                  <img id="' . $section_id . '_img_' . $input_id . '" src="./pics/' . $input_id . '_' . $input_color . '.jpg" width="100%">
                             </div>
                         </div>
-                        <div class="three column">
+                        <div class="qtr col">
                             <form class="product-filters">
                                 <input type="hidden" name="id" value="' . $input_id . '">
                                 <input type="hidden" name="add">
-                                <div id="option--color" class="option-group">
-                                    <div class="option__header">
+                                <div id="option--color">
+                                    <div>
                                         <h4>Select color</h4>
                                     </div>
                                     <div class="row">';
 
             foreach ($distinct_color as $color_name) {
-                echo '  <div class="six column user-p-zero">
+                echo '  <div class="halfwid col">
                                 <label for="color--' . $color_name . '" class="label label--checkbox">';
 
 
                 if ($color_name == $input_color) {
-                    echo ' <input type="radio" name="color" class="input--checkbox" id="color--' . $color_name . '" value="' . $color_name . '" checked onchange="updateStock(this, \'color\')">';
+                    echo ' <input type="radio" name="color" class="input-checkbox"
+                     id="color--' . $color_name . '" value="' . $color_name . '"
+                      checked>';
                 } else {
-                    echo ' <input type="radio" name="color" class="input--checkbox" id="color--' . $color_name . '" value="' . $color_name . '" onchange="updateStock(this, \'color\')">';
+                    echo ' <input type="radio" name="color" class="input-checkbox"
+                     id="color--' . $color_name . '" value="' . $color_name . '"
+                    >';
                 }
 
 
@@ -219,25 +223,22 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             //Container for size input
             echo '</div>
 						</div>
-						<div id="option--size" class="option-group">
-							<div class="option__header">
+						<div id="option--size">
+							<div>
 								<h4>Select size</h4>
-								<div class="header__button">
-
-								</div>
 							</div>
-							<div class="row">';
-
+                            <div class="row">';   
+            sort($distinct_size);
             foreach ($distinct_size as $size) {
-                echo '<div class="six column user-p-zero">
-                                <label for="size--' . $size . '" class="label label--checkbox">';
+                echo '<div class="halfwid col">
+                <label for="size--' . $size . '" >';
 
                 if ($size == $input_size) {
-                    echo '<input type="radio" name="size" class="input--checkbox" id="size--' . $size . '" value="' . $size . '" checked onchange="updateStock(this, \'size\')">';
+                    echo '<input type="radio" name="size" class="input-checkbox" id="size--' . $size . '" value="' . $size . '" checked>';
                 } else {
-                    echo '<input type="radio" name="size" class="input--checkbox" id="size--' . $size . '" value="' . $size . '" onchange="updateStock(this, \'size\')">';
+                    echo '<input type="radio" name="size" class="input-checkbox" id="size--' . $size . '" value="' . $size . '">';
                 }
-                echo strtoupper($size) .
+                echo $size .
                     '</label>	
                             </div>';
             }
@@ -251,16 +252,14 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 							<div>Quantity</div>
 							<input type="number" min="1" max="' . $inventory_array[$input_color][$input_size] . '" name="quantity" class="input--text" id="product-quantity" value="' . ($input_quantity > 0 ? $input_quantity : 1) . '" oninput="updatePriceProduct(this)">
 						</div>
-						<button type="submit" class="button button--primary button--large option__button" id="button--addtocart"' . ($stockout ? ' style="display:none;"' : '') . '>
-							Add to cart ($<span id="product-price-subtotal"> ' .
-                number_format($discounted_price, 2)
-                . '</span>)
+						<button type="submit" class="submitbutton"' . ($stockout ? ' style="display:none;"' : '') . '>
+							Add to Cart
 						</button>
-						<span class="button button--primary button--large option__button" id="button--outofstock"' . ($stockout ? '' : ' style="display:none;"') . '>Out of Stock</span>
+						<span class="submitbutton" id="button--outofstock"' . ($stockout ? '' : ' style="display:none;"') . '>Out of Stock</span>
 					</form>
 				</div>';
             //Display product information
-            echo ' <div class="four column">
+            echo ' <div class="onethird col">
                             <div class="product-info">
                                 <div class="product-info__name">
                                     <h4 class="header">' . $name . '</h4>
