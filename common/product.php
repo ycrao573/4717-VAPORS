@@ -1,12 +1,9 @@
-<div class="product">
+<div class="product" style="margin-right: 12%;">
     <div class="row product__image">
         <?php
         echo '<a href="./product.php?id=' . $product_id . '" class="user-flex">';
         echo '<img id="' . $section_id . '_img_' . $product_id . '"></a>';
         ?>
-        <div class="product__label">
-            <div class="product__label--new">New</div>
-        </div>
     </div>
     <div class="row product__name">
         <?php
@@ -29,16 +26,15 @@
         ?>
     </div>
     <div class="row product__color">
-
         <?php
-        $qry = 'SELECT inventory.color FROM inventory WHERE inventory.productsID = ' . $product_id . ';';
+        $qry = 'SELECT inventory.color FROM inventory WHERE inventory.productID = ' . $product_id . ';';
         $inventory_result = $conn->query($qry);
         $inventory_num_rows = $inventory_result->num_rows;
         $displayed_colors = array();
         for ($j = 0; $j < $inventory_num_rows; $j++) {
             $inventory_row = $inventory_result->fetch_assoc();
-            $color = strtolower($inventory_row["color"]);
 
+            $color = strtolower($inventory_row["color"]);
             if (!in_array($color, $displayed_colors)) {
                 $size = $inventory_row["size"];
                 $button_id = $section_id . '_button_' . $product_id . '_' . $color;
@@ -49,6 +45,7 @@
                 array_push($displayed_colors, $color);
             }
         }
+
         ?>
     </div>
 </div>
