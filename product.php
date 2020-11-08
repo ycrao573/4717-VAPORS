@@ -103,8 +103,9 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                 $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.quantity, c.paid FROM carts AS c 	
                 WHERE c.accountId = ' . $current_id . ' AND c.paid = 0 LIMIT 1;';
                 $query_result = $conn->query($qry);
-                if ($query_result) {
-                    $row_no = $query_result->num_rows;
+                $row_no = $query_result->num_rows;
+                // echo $row_no;
+                if ($row_no) {
                     $row = $query_result->fetch_assoc();
                     $cartId = $row["cartId"];
                     // Exists active shopping cart
@@ -118,7 +119,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     echo $qry;
                     $updated = $conn->affected_rows;
                     echo $updated;
-                    if (!$updated) {
+                    if ($updated < 1) {
                         // if product not in active cart
                         $qry = 'INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `color`, `size`, `price`, `discount`, `quantity`, `paid`) VALUES (';
                         $qry = $qry . $cartId . ', ';
