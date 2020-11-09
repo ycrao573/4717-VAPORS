@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2020 at 01:07 AM
+-- Generation Time: Nov 09, 2020 at 08:00 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -67,16 +67,16 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `quantity` int(10) unsigned NOT NULL,
   `paid` int(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `carts`
 --
 
 INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, `color`, `size`, `price`, `discount`, `quantity`, `paid`) VALUES
-(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 0.00, 2, 0),
-(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 10.00, 2, 0),
-(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 'White', 9, 129.90, 0.00, 2, 0),
+(1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 0.00, 2, 1),
+(2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 10.00, 2, 1),
+(3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 'White', 9, 129.90, 0.00, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -181,6 +181,28 @@ INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ordersDate` datetime NOT NULL,
+  `accountID` int(10) unsigned NOT NULL,
+  `total` decimal(7,2) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders` (`accountID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `ordersDate`, `accountID`, `total`) VALUES
+(1, '2020-11-09 17:37:22', 1, 135.90);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -209,28 +231,6 @@ INSERT INTO `products` (`id`, `name`, `category`, `gender`, `description`, `pric
 (6, 'Air JORDAN M', 'BAS', 'M', 'Beyond capable and controllable.', 399.90, 0.00),
 (7, 'Nike MAX SE', 'CAS', 'M', 'Mate on the ground.', 199.90, 0.00),
 (8, 'Nike ZOOM', 'RUN', 'W', 'Running performance, at joy.', 249.90, 0.00);
-
-
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ordersDate` datetime NOT NULL,
-  `accountID` int(10) unsigned NOT NULL,
-  `total` decimal(7,2) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orders` (`accountID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `ordersDate`, `accountID`, `total`) VALUES
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
