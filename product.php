@@ -10,15 +10,15 @@
     if ($conn->connect_error) exit();
 
     $current_email = $_SESSION["email"];
-    $input_quantity = $_GET["quantity"];
-    $input_color = $_GET["color"];
-    $input_size = $_GET["size"];
-    $input_id = $_GET["id"];
-    $add_to_cart = isset($_GET["add"]);
+    $get_quantity = $_GET["quantity"];
+    $get_size = $_GET["size"];
+    $get_color = $_GET["color"];
+    $get_id = $_GET["id"];
+    $add2cart = isset($_GET["add"]);
 
-    if (!$input_id) {
-        $add_to_cart = false;
-        $input_id = 1;
+    if (!$get_id) {
+        $add2cart = false;
+        $get_id = 1;
     }
 
     $qry = 'SELECT * FROM accounts WHERE email = "' . $current_email . '";';
@@ -28,15 +28,15 @@
     $current_id = $row["id"];
 
     $qry = 'SELECT p.name, p.price, p.gender, p.category, p.discount, p.description, i.color, i.size, i.stock FROM products AS p, inventory AS i 	
-WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
+WHERE p.id = ' . $get_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
     $query_result = $conn->query($qry);
     if ($query_result) {
         $row_no = $query_result->num_rows;
         if ($row_no > 0) {
             $row;
-            $distinct_size = array();
-            $distinct_color = array();
-            $inventory_array = array();
+            $listsize = array();
+            $listcolor = array();
+            $liststock = array();
 
             //Inventory array
             for ($i = 0; $i < $row_no; $i++) {
@@ -45,63 +45,55 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                 $color = strtolower($row["color"]);
                 $size = $row["size"];
 
-                if (!in_array($color, $distinct_color)) {
-                    array_push($distinct_color, $color);
-                }
-
-                if (!in_array($size, $distinct_size)) {
-                    array_push($distinct_size, $size);
-                }
-
-                if (!isset($inventory_array[$color])) {
-                    $inventory_array[$color] = array();
-                }
-                $inventory_array[$color][$size] = $stock;
+                if (!in_array($color, $listcolor)) array_push($listcolor, $color);
+                if (!in_array($size, $listsize)) array_push($listsize, $size);
+                if (!isset($liststock[$color])) $liststock[$color] = array();
+                $liststock[$color][$size] = $stock;
             }
             $query_result->free();
 
             //Get product information
             $name = stripslashes($row["name"]);
-            $discount = $row["discount"];
             $price = $row["price"];
-            $discounted_price = (1 - $product_discount / (float)100) * $price;
+            $discount = $row["discount"];
+            $discounted_price =  $price * (1 - $product_discount / (float)100);
             $gender = $row["gender"];
             $category = $row["category"];
             $description = stripslashes($row["description"]);
 
-            if (!$input_color || !in_array($input_color, $distinct_color)) {
+            if (!$get_color || !in_array($get_color, $listcolor)) {
                 // default display color
-                $input_color = $distinct_color[0];
-                $add_to_cart = false;
+                $get_color = $listcolor[0];
+                $add2cart = false;
             }
 
-            if (!$input_size || !in_array($input_size, $distinct_size)) {
+            if (!$get_size || !in_array($get_size, $listsize)) {
                 // default display size
-                $input_size = $distinct_size[0];
-                $add_to_cart = false;
+                $get_size = $listsize[0];
+                $add2cart = false;
             }
 
-            if (!$input_quantity || $input_quantity < 1) {
+            if (!$get_quantity || $get_quantity < 1) {
                 // default quantity
-                $input_quantity = 1;
-                $add_to_cart = false;
+                $get_quantity = 1;
+                $add2cart = false;
             }
 
             $stockout = false;
 
             if (
-                $input_quantity > $inventory_array[$input_color][$input_size]
-                || !$inventory_array[$input_color][$input_size]
+                !$liststock[$get_color][$get_size] ||
+                $get_quantity > $liststock[$get_color][$get_size]
             ) {
-                $input_quantity = $inventory_array[$input_color][$input_size];
-                if ($input_quantity < 1) {
+                $get_quantity = $liststock[$get_color][$get_size];
+                if ($get_quantity < 1) {
                     $stockout = true;
-                    $add_to_cart = false;
+                    $add2cart = false;
                 }
             }
 
             //Add selected product to cart
-            if ($add_to_cart) {
+            if ($add2cart) {
                 $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.quantity, c.paid FROM carts AS c 	
                 WHERE c.accountId = ' . $current_id . ' AND c.paid = 0 LIMIT 1;';
                 $query_result = $conn->query($qry);
@@ -111,11 +103,11 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     $row = $query_result->fetch_assoc();
                     $cartId = $row["cartId"];
                     // Exists active shopping cart
-                    $qry = 'UPDATE carts SET quantity = quantity + ' . $input_quantity . ' WHERE accountId = ' . $current_id . ' AND cartId = ' . $cartId . ' AND paid = 0';
+                    $qry = 'UPDATE carts SET quantity = quantity + ' . $get_quantity . ' WHERE accountId = ' . $current_id . ' AND cartId = ' . $cartId . ' AND paid = 0';
                     $qry = $qry . ' AND name = ' . '\'' . $name . '\'';
-                    $qry = $qry . ' AND color = ' . '\'' . ucfirst($input_color) . '\'';
+                    $qry = $qry . ' AND color = ' . '\'' . ucfirst($get_color) . '\'';
                     $qry = $qry . ' AND gender = ' . '\'' . $gender . '\'';
-                    $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
+                    $qry = $qry . ' AND size = ' . '\'' . $get_size . '\'';
                     $qry = $qry . ';';
                     $query_result = $conn->query($qry);
                     // echo $qry;
@@ -129,11 +121,11 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                         $qry = $qry . '\'' . $name . '\'' . ', ';
                         $qry = $qry . '\'' . $category . '\'' . ', ';
                         $qry = $qry . '\'' . $gender . '\'' . ', ';
-                        $qry = $qry . '\'' . ucfirst($input_color) . '\'' . ', ';
-                        $qry = $qry . $input_size . ', ';
+                        $qry = $qry . '\'' . ucfirst($get_color) . '\'' . ', ';
+                        $qry = $qry . $get_size . ', ';
                         $qry = $qry . $price . ', ';
                         $qry = $qry . $discount . ', ';
-                        $qry = $qry . $input_quantity . ', ';
+                        $qry = $qry . $get_quantity . ', ';
                         $qry = $qry . '0);';
                         $query_result = $conn->query($qry);
                         // echo $qry;
@@ -158,11 +150,11 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     $qry = $qry . '\'' . $name . '\'' . ', ';
                     $qry = $qry . '\'' . $category . '\'' . ', ';
                     $qry = $qry . '\'' . $gender . '\'' . ', ';
-                    $qry = $qry . '\'' . ucfirst($input_color) . '\'' . ', ';
-                    $qry = $qry . $input_size . ', ';
+                    $qry = $qry . '\'' . ucfirst($get_color) . '\'' . ', ';
+                    $qry = $qry . $get_size . ', ';
                     $qry = $qry . $price . ', ';
                     $qry = $qry . $discount . ', ';
-                    $qry = $qry . $input_quantity . ', ';
+                    $qry = $qry . $get_quantity . ', ';
                     $qry = $qry . '0);';
                     $query_result = $conn->query($qry);
                     // echo $qry;
@@ -180,71 +172,66 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                                     <div class="col" style="width: 8%; display: block">';
 
             // Display color picker
-            foreach ($distinct_color as $color_name) {
-                if ($color_name == $input_color) {
-                    echo '<div class="product-thumbnails">';
-                } else {
-                    echo '<div class="product-thumbnails">';
-                }
-                $button_id = $section_id . '_button_' . $input_id . '_' . $color_name;
-                echo '  <input type="image" id="' . $button_id . '" src="./pics/' . $input_id . '_' . $color_name . '.jpg" width="100%" onclick="pickColor(this)">
+            foreach ($listcolor as $color_element) {
+                echo '<div class="product-img-thumb">';
+                $button_id = 
+                $section_id .
+                '_button_' . $get_id . '_' .
+                $color_element;
+                echo '  <input type="image" id="' . $button_id . '" src="./pics/' . $get_id . '_' . $color_element . '.jpg" width="100%" onclick="pickColor(this)">
                           </div>';
             }
 
-            //Container for color input
-            echo '  </div>
+            // selection area for color
+            echo ' 
+            </div>
                         <div class="qtr col" style="max-width: 500px;">
                             <div class="product-preview">
-                                 <img id="' . $section_id . '_img_' . $input_id . '" src="./pics/' . $input_id . '_' . $input_color . '.jpg" width="100%">
+                                 <img id="' . $section_id . '_img_' . $get_id . '" src="./pics/' . $get_id . '_' . $get_color . '.jpg" width="100%">
                             </div>
                         </div>
                         <div class="col" style="width: 30%; display: block; min-width: 260px; margin-left: 10px; margin-right: 25px">
                             <form class="product-filters">
-                                <input type="hidden" name="id" value="' . $input_id . '">
+                                <input type="hidden" name="id" value="' . $get_id . '">
                                 <input type="hidden" name="add">
-                                <div id="option--color">
+                                <div>
                                     <div>
                                         <h3>Select color</h3><hr>
                                     </div>
                                     <div class="row">';
 
-            foreach ($distinct_color as $color_name) {
+            foreach ($listcolor as $color_element) {
                 echo '  <div class="halfwid col">
-                                <label style="margin: 5px" for="color--' . $color_name . '" class="label label--checkbox">';
-
-
-                if ($color_name == $input_color) {
-                    echo ' <input type="radio" name="color" class="input-checkbox"
-                     id="color--' . $color_name . '" value="' . $color_name . '"
-                      checked>';
+                                <label style="margin: 5px" for="color--' . $color_element . '">';
+                if ($color_element == $get_color) {
+                    echo ' <input id="color--' . $color_element . '" value="' . $color_element . '" type="radio" name="color" class="input-checkbox" checked>';
                 } else {
-                    echo ' <input type="radio" name="color" class="input-checkbox"
-                     id="color--' . $color_name . '" value="' . $color_name . '"
-                    >';
+                    echo ' <input id="color--' . $color_element . '" value="' . $color_element . '" type="radio" name="color" class="input-checkbox">';
                 }
 
-                echo ucfirst($color_name) .
+                echo ucfirst($color_element) .
                     '</label>
                             </div>';
             }
 
-            //Container for size input
+            // selection area for size
             echo '</div>
 						</div>
-						<div id="option--size">
+						<div>
 							<div><br>
 								<h3>Select size</h3><hr>
 							</div>
                             <div class="row">';
-            sort($distinct_size);
-            foreach ($distinct_size as $size) {
+            sort($listsize);
+            
+            foreach ($listsize as $size) {
                 echo '<div class="halfwid col">
                 <label style="margin: 5px" for="size--' . $size . '" >';
 
-                if ($size == $input_size) {
-                    echo '<input type="radio" name="size" class="input-checkbox" id="size--' . $size . '" value="' . $size . '" checked>';
+                if ($size == $get_size) {
+                    echo '<input name="size" id="size--' . $size . '" value="' . $size . '" type="radio" class="input-checkbox"  checked>';
                 } else {
-                    echo '<input type="radio" name="size" class="input-checkbox" id="size--' . $size . '" value="' . $size . '">';
+                    echo '<input name="size" id="size--' . $size . '" value="' . $size . '" type="radio" class="input-checkbox">';
                 }
                 echo $size .
                     '</label>
@@ -256,9 +243,9 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     </div>';
 
             //Container for quantity input + submit button
-            echo ' <div class="option--quantity" id="option--quantity"' . ($stockout ? ' style="display:none;"' : '') . '>
+            echo ' <div' . ($stockout ? ' style="display:none;"' : '') . '>
 							<div><br><h3>Quantity</h3><hr><br></div>
-							<input type="number" min="1" max="' . $inventory_array[$input_color][$input_size] . '" name="quantity" class="input--text" id="product-quantity" value="' . ($input_quantity > 0 ? $input_quantity : 1) . '">
+							<input type="number" min="1" max="' . $liststock[$get_color][$get_size] . '" name="quantity" class="input--text" id="product-quantity" value="' . ($get_quantity > 0 ? $get_quantity : 1) . '">
 						</div>
 						<button type="submit" class="submitbutton"' . ($stockout ? ' style="display:none;"' : '') . '>
 							Add to Cart

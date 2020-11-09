@@ -273,10 +273,6 @@ textarea {
   font-size: 15px;
 }
 
-.option-group {
-  margin-bottom: 1rem;
-}
-
 .label-filter {
   cursor: pointer;
   display: block;
@@ -288,69 +284,69 @@ textarea {
   margin-bottom: 6px;
 }
 
-.product__label {
+.card--label {
   position: absolute;
   display: block;
   bottom: 0;
 }
 
-.product__label * {
-  font-size: 0.675rem;
-  letter-spacing: 0.1em;
-  line-height: 1.25em;
-  text-transform: uppercase;
-  padding: 0.25rem 0.5rem;
-  background: black;
-  color: white;
-  margin-top: 0.125rem;
-  float: left;
-  clear: both;
-  cursor: pointer;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-
-.product__label--new {
+.card--color--black {
   background: black;
 }
 
-.product__label--popular {
-  background: black;
+.card--color--white {
+  background: rgb(231, 231, 231);
 }
 
-.product__label--discount {
-  background: black;
+.card--color--orange {
+  background: #f59f00;
 }
 
-.product__image img {
+.card--color--yellow {
+  background: #fffb00;
+}
+
+.card--color--brown {
+  background: rgb(190, 133, 0);
+}
+
+.card--color--blue {
+  background: #00458a;
+}
+
+.card--color--pink {
+  background: pink;
+}
+
+.card--image img {
   width: 100%;
 }
 
-.product__name {
+.card--name {
   overflow: hidden;
 }
 
-.product__name a {
+.card--name a {
   text-decoration: none;
   color: #001122;
   font-size: 120%;
   margin-bottom: 2px;
 }
 
-.product__price {
+.card--price {
   margin-bottom: 12px;
   align-items: center;
 }
 
-.product__price--current {
+.card--price--current {
   color: #666666;
 }
 
-.product__color {
+.card--color {
   flex-wrap: wrap;
 }
 
-.product__color * {
+.card--color * {
   border: none;
   border-radius: 1.96px;
   width: 1.64rem;
@@ -360,35 +356,7 @@ textarea {
   cursor: pointer;
 }
 
-.product__color--black {
-  background: black;
-}
-
-.product__color--white {
-  background: rgb(231, 231, 231);
-}
-
-.product__color--orange {
-  background: #f59f00;
-}
-
-.product__color--yellow {
-  background: #fffb00;
-}
-
-.product__color--brown {
-  background: rgb(190, 133, 0);
-}
-
-.product__color--blue {
-  background: #004d99;
-}
-
-.product__color--pink {
-  background: pink;
-}
-
-.product-thumbnails {
+.product-img-thumb {
   margin-bottom: 0.5rem;
   cursor: pointer;
   display: flex;

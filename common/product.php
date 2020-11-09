@@ -1,17 +1,17 @@
 <div class="product" style="margin-right: 12%;">
-    <div class="row product__image">
+    <div class="row card--image">
         <?php
         echo '<a href="./product.php?id=' . $product_id . '" class="user-flex">';
         echo '<img id="' . $section_id . '_img_' . $product_id . '"></a>';
         ?>
     </div>
-    <div class="row product__name">
+    <div class="row card--name">
         <?php
         echo '<a href="./product.php?id=' . $product_id . '">' . $product_name . '</a>';
         ?>
     </div>
-    <div class="row product__price">
-        <div class="product__price--current">
+    <div class="row card--price">
+        <div class="card--price--current">
             <h2 class="header">
                 <?php
                 $discounted_price = (1 - $product_discount / (float)100) * $product_price;
@@ -21,11 +21,11 @@
         </div>
         <?php
         if ($product_discount > 0) {
-            echo '<div class="product__price--pre-discount">' . '$' . number_format($product_price, 2) . '</div>';
+            echo '<div class="card--price--pre-discount">' . '$' . number_format($product_price, 2) . '</div>';
         }
         ?>
     </div>
-    <div class="row product__color">
+    <div class="row card--color">
         <?php
         $qry = 'SELECT inventory.color FROM inventory WHERE inventory.productID = ' . $product_id . ';';
         $inventory_result = $conn->query($qry);
@@ -38,7 +38,7 @@
             if (!in_array($color, $displayed_colors)) {
                 $size = $inventory_row["size"];
                 $button_id = $section_id . '_button_' . $product_id . '_' . $color;
-                echo '<button class="product__color--' . $color . '" onclick="pickColor(this)" id="' . $button_id . '"></button>';
+                echo '<button class="card--color--' . $color . '" onclick="pickColor(this)" id="' . $button_id . '"></button>';
                 if ($j == 0) {
                     echo '<script>fetchImg("' . $button_id . '");</script>';
                 }

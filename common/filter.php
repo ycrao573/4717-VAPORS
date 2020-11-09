@@ -3,7 +3,7 @@
 		<div>
 			<h2>Filter</h2>
 		</div><br>
-		<div id="option-gender">
+		<div id="gender">
 			<div>
 				<h4>Gender</h4>
 				<hr><br>
@@ -17,7 +17,7 @@
 				Women
 			</label>
 		</div><br>
-		<div id="option-type">
+		<div id="type">
 			<div>
 				<h4>Type</h4>
 				<hr><br>
@@ -49,7 +49,7 @@
 			</label>
 		</div><br>
 
-		<div id="option-size">
+		<div id="size">
 			<div>
 				<h4>Size</h4>
 				<hr><br>
@@ -109,7 +109,7 @@
 				</div>
 			</div>
 		</div><br>
-		<div id="option-color">
+		<div id="color">
 			<div>
 				<h4>Color</h4>
 				<hr><br>
