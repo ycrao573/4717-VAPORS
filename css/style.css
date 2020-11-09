@@ -165,10 +165,6 @@ body {
   width: 33%;
 }
 
-.col.five {
-  width: 41.6%;
-}
-
 .col.halfwid {
   width: 50%;
 }
@@ -177,19 +173,15 @@ body {
   width: 100%;
 }
 
-.col.centered {
-  text-align: center;
-}
-
 .footer {
   line-height: 1em;
   padding: 1.5rem 0;
-  background: #012;
-  color: #ccc;
+  background: black;
+  color: #cccccc;
   margin-top: 3rem;
 }
 
-.footer__copyright {
+.footer_cr {
   font-size: 0.875rem;
   justify-self: flex-end;
   flex: 1;
@@ -369,7 +361,7 @@ textarea {
 }
 
 .product__color--black {
-  background:black;
+  background: black;
 }
 
 .product__color--white {

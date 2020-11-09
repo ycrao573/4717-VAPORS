@@ -64,7 +64,7 @@
                         <h3><a href="#policy" class="buttontext">Our Return Policy</a></h3><br>
                         <p>
                             Within 14 days of the order being received, you can return any shoes <b>in saleable
-                            condition</b>.
+                                condition</b>.
                         </p>
                         <p>
                             To process your return, please contact our customer center at +65 6666 6666 or

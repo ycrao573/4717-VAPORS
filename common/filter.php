@@ -5,7 +5,8 @@
 		</div><br>
 		<div id="option-gender">
 			<div>
-				<h4>Gender</h4><hr><br>
+				<h4>Gender</h4>
+				<hr><br>
 			</div>
 			<label for="gender-men" class="label-filter">
 				<input type="checkbox" name="gender[]" value="M" id="gender-men">
@@ -18,7 +19,8 @@
 		</div><br>
 		<div id="option-type">
 			<div>
-				<h4>Type</h4><hr><br>
+				<h4>Type</h4>
+				<hr><br>
 			</div>
 
 			<label for="category-RUN" class="label-filter">
@@ -49,7 +51,8 @@
 
 		<div id="option-size">
 			<div>
-				<h4>Size</h4><hr><br>
+				<h4>Size</h4>
+				<hr><br>
 			</div>
 			<div class="row">
 				<div class="onethird col">
@@ -108,7 +111,8 @@
 		</div><br>
 		<div id="option-color">
 			<div>
-				<h4>Color</h4><hr><br>
+				<h4>Color</h4>
+				<hr><br>
 			</div>
 			<div class="row">
 

@@ -1,6 +1,6 @@
 <div class="navright">
     <?php
-    if ($_POST["modal"] == "logout"){
+    if ($_POST["modal"] == "logout") {
         unset($_SESSION["name"]);
         unset($_SESSION["email"]);
     }

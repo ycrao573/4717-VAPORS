@@ -89,15 +89,17 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 
             $stockout = false;
 
-            if ($input_quantity > $inventory_array[$input_color][$input_size]
-                ||!$inventory_array[$input_color][$input_size]) {
+            if (
+                $input_quantity > $inventory_array[$input_color][$input_size]
+                || !$inventory_array[$input_color][$input_size]
+            ) {
                 $input_quantity = $inventory_array[$input_color][$input_size];
                 if ($input_quantity < 1) {
                     $stockout = true;
                     $add_to_cart = false;
                 }
             }
-            
+
             //Add selected product to cart
             if ($add_to_cart) {
                 $qry = 'SELECT c.id, c.cartId, c.accountId, c.name, c.category, c.gender, c.price, c.discount, c.quantity, c.paid FROM carts AS c 	
@@ -164,9 +166,9 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     $qry = $qry . '0);';
                     $query_result = $conn->query($qry);
                     // echo $qry;
-                    if ($query_result) {
-                        echo 'Create cart success.';
-                    }
+                    // if ($query_result) {
+                    //     echo 'Create cart success.';
+                    // }
                 }
             }
 
@@ -233,7 +235,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 							<div><br>
 								<h3>Select size</h3><hr>
 							</div>
-                            <div class="row">';   
+                            <div class="row">';
             sort($distinct_size);
             foreach ($distinct_size as $size) {
                 echo '<div class="halfwid col">

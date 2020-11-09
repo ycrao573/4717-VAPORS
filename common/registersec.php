@@ -3,12 +3,12 @@
         <div class="row">
             <div style="margin: auto; display: block; width: 500px">
                 <?php
-                    if (isset($_SESSION["name"])) {
+                if (isset($_SESSION["name"])) {
                     echo '<h2 style="color: green">You have successfully Registered!</h2><br><br>';
                     echo '<h3><a href="./index.php">Back to the home page</a></h3>';
                     echo '<br><h4><a href="https://192.168.56.2:20000">Check Your Email!</a></h4>';
-                    }else{
-                        echo '
+                } else {
+                    echo '
                         <form method="post" id="register" onsubmit="return validateRegister();">
                         <input type="hidden" name="modal" value="register">    
                             <h2>Register</h2><br><hr>
@@ -79,7 +79,7 @@
                             </div>
                         </form>
                         ';
-                    }?>
+                } ?>
             </div>
         </div>
     </div>

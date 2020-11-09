@@ -16,8 +16,8 @@
             $md5password = md5($password);
             $qry = 'SELECT * FROM accounts AS a WHERE a.email ="' . $email . '" AND a.password="' . $md5password . '";';
             $query_result = $conn->query($qry);
-            
-            if($query_result && $query_result->num_rows == 1){
+
+            if ($query_result && $query_result->num_rows == 1) {
                 $account = $query_result->fetch_assoc();
 
                 $id = $account['id'];
@@ -30,17 +30,18 @@
                 $query_result->free();
 
                 $_SESSION["name"] = $name;
-                $_SESSION["email"] = $email;      
-            }else{
+                $_SESSION["email"] = $email;
+            } else {
                 $flagLogin = false;
             }
         }
     }
 
-    echo'<br><br>';
+    echo '<br><br>';
     include './common/loginsec.php';
-    echo'<br><br>';
+    echo '<br><br>';
     include './common/copyright.php';
     ?>
 </body>
+
 </html>

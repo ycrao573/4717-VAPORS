@@ -27,13 +27,13 @@
                             <th>Quantity</th>
                             <th>Subtotal</th>
                         </tr>';
-    $qry = 'SELECT * FROM accounts WHERE email = '. '\'' . $_SESSION['email'] . '\'';
+    $qry = 'SELECT * FROM accounts WHERE email = ' . '\'' . $_SESSION['email'] . '\'';
     $query_result = $conn->query($qry);
     $row_no = $query_result->num_rows;
     $row = $query_result->fetch_assoc();
-    $current_id = $row["id"];    
+    $current_id = $row["id"];
 
-    $qry = 'SELECT * FROM carts WHERE accountId = '. '\'' . $current_id . '\'';
+    $qry = 'SELECT * FROM carts WHERE accountId = ' . '\'' . $current_id . '\'';
     $qry = $qry . ' AND paid = 0';
     $qry = $qry . ' ORDER BY name, color, size';
     $qry = $qry . ';';
@@ -42,9 +42,9 @@
     if ($row_no > 0) {
         for ($i = 0; $i < $row_no; $i++) {
             $row = $query_result->fetch_assoc();
-            
+
             $name = $row["name"];
-            $qry = 'SELECT p.id from products AS p where name = "'.$name .'"';
+            $qry = 'SELECT p.id from products AS p where name = "' . $name . '"';
             $res = $conn->query($qry);
             $prod = $res->fetch_assoc();
             $id = $row["id"];
@@ -53,23 +53,23 @@
             $size = $row["size"];
             $price = $row["price"];
             $discount = $row["discount"];
-            
+
             $query = 'SELECT stock
             FROM inventory WHERE
             productID = ' . $prod["id"] . '
-            AND color ="' . $color .'"
+            AND color ="' . $color . '"
             AND size=' . $size . '
             ;';
             $result = $conn->query($query);
             $stockres = $result->fetch_assoc();
-            
+
             $quantity = min($stockres["stock"], $row["quantity"]);
 
             $conn->query('UPDATE carts SET quantity =
-                        '. $quantity .' WHERE id = '. $id .';');
-            
-            if(!$quantity){
-                $conn->query('DELETE from carts WHERE id = '. $id .'');
+                        ' . $quantity . ' WHERE id = ' . $id . ';');
+
+            if (!$quantity) {
+                $conn->query('DELETE from carts WHERE id = ' . $id . '');
                 continue;
             }
 
@@ -86,28 +86,26 @@
             <td>' . $size . '</td>
             <td id="' . $id . '_' . $color . '_' . $size . '_price-single">$' . number_format($prices_per_item, 2) . '</td>
             <td>' . $discount . '%</td>
-            <td>' . $quantity . '</td>'
-            ;
+            <td>' . $quantity . '</td>';
             echo '<td ><strong>$<span class="price-subtotal" id="' . $id . '_' . $color . '_' . $size . '_price-subtotal">' .
                 number_format($subtotal, 2) . '
                                     </span></strong></td>
                                 </tr>';
         }
-
     }
     echo '</table>';
-    if ($total){
-    echo'
+    if ($total) {
+        echo '
     <br><br><h2 style="float:right">Total $<span id="total-price">'
-     . number_format($total, 2) . '</span></h2>';
-    }else{
+            . number_format($total, 2) . '</span></h2>';
+    } else {
         echo '<br><h3 style="float:right">Nothing to Checkout!</h3>';
     }
     ?>
     </div>
     </div>
     <br>
-    <?php if ($total){
+    <?php if ($total) {
         echo '
         <button type="submit" class="submitbutton" style="max-width: 250px;
         float: right; margin-right: 2%"><h4>GO TO CHECKOUT</h4></button>';
@@ -118,6 +116,6 @@
     </section>
 
 </body>
-<?php include './common/copyright.php';?>
+<?php include './common/copyright.php'; ?>
 
 </html>

@@ -40,7 +40,7 @@
             }
 
             if (!empty($phone)) {
-                $qry .= ', phone'; 
+                $qry .= ', phone';
                 $flag3 = true;
             }
 

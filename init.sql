@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2020 at 08:00 PM
+-- Generation Time: Nov 09, 2020 at 10:06 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `quantity` int(10) unsigned NOT NULL,
   `paid` int(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `carts`
@@ -178,28 +178,6 @@ INSERT INTO `inventory` (`id`, `productID`, `color`, `size`, `stock`, `sale`) VA
 (88, 8, 'Pink', '8', 6634, 0),
 (89, 8, 'Pink', '9', 686, 0),
 (90, 8, 'Pink', '10', 6, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ordersDate` datetime NOT NULL,
-  `accountID` int(10) unsigned NOT NULL,
-  `total` decimal(7,2) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orders` (`accountID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `ordersDate`, `accountID`, `total`) VALUES
-(1, '2020-11-09 17:37:22', 1, 135.90);
 
 -- --------------------------------------------------------
 

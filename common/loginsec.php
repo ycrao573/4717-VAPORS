@@ -6,9 +6,8 @@
                 if (isset($_SESSION["name"])) {
                     echo '<h2 style="color: green">Login Success!</h2><br><br>';
                     echo '<h3><a href="./index.php">Back to the home page</a></h3>';
-                }
-                else{
-                echo'
+                } else {
+                    echo '
                 <form method="post" id="login" onsubmit="return validateLogin();">
                     <input type="hidden" name="modal" value="login">
                     <h2>Login</h2>

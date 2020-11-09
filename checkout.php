@@ -115,11 +115,11 @@
                     $qry = $qry . ' AND paid = 0';
                     $qry = $qry . ' ORDER BY name, color, size';
                     $qry = $qry . ';';
-                    
+
                     $query_result = $conn->query($qry);
                     $row_no = $query_result->num_rows;
                     $total = 0.00;
-                    
+
                     echo '<div style="float: right; margin: 4%; width: 42%">
                     <div class="invoice">
                         <br>
@@ -136,7 +136,7 @@
                                     Subtotal
                                 </th>
                             </tr>';
-                            // echo $qry;
+                    // echo $qry;
                     if ($row_no > 0) {
                         for ($i = 0; $i < $row_no; $i++) {
                             $row = $query_result->fetch_assoc();
@@ -192,7 +192,7 @@
                         CHECKOUT
                     </button>
                     <br>';
-                    }else{
+                    } else {
                         echo '</table>
                         <br><h3>Nothing to checkout!</h3>
                         </div>
@@ -203,22 +203,22 @@
 
                     if (isset($_POST["checkout"]) && $islogin) {
                         if (isset($_SESSION["email"])) {
-                            $msg = "VAPORS: Thanks for purchasing shoes in VAPORS.";
+                            $msg = "Dear Valued Customer: Thank you for purchasing shoes from us.";
                             mail("f32ee@localhost", "VAPORS: Transaction Successful", $msg);
                         }
-                        $msg = "VAPORS: New transaction from " . $name . " received";
-                        mail("f32ee@localhost", "VAPORS: New Transaction", $msg);
+                        $msg = "New transaction received with total of $" . $total;
+                        mail("f32ee@localhost", "New Transaction Received", $msg);
 
                         // Update inventory item by item
                         $qry = 'SELECT * FROM carts WHERE accountId = ' . '\'' . $current_id . '\'';
                         $qry = $qry . ' AND paid = 0';
                         $qry = $qry . ' ORDER BY name, color, size';
                         $qry = $qry . ';';
-                        echo $qry;
+                        // echo $qry;
 
                         $query_result = $conn->query($qry);
                         $row_no = $query_result->num_rows;
-                        
+
                         if ($row_no > 0) {
                             for ($i = 0; $i < $row_no; $i++) {
                                 $row = $query_result->fetch_assoc();
@@ -234,15 +234,15 @@
                                 $price = $row["price"];
                                 $discount = $row["discount"];
                                 $quantity = $row["quantity"];
-    
+
                                 $prices_per_item = (1 - $discount / (float)100) * $price;
                                 $subtotal = $prices_per_item * $quantity;
-                                
+
                                 $qry = 'UPDATE inventory SET stock = stock -' . $quantity . ', sale = sale +' . $quantity . ' WHERE size = ' . $size;
                                 $qry = $qry . ' AND productID = ' . '\'' . $id . '\'';
                                 $qry = $qry . ' AND color = ' . '\'' . $color . '\'';
                                 $qry = $qry . ';';
-                                echo $qry;
+                                // echo $qry;
                                 $update_query_result = $conn->query($qry);
                             }
                         }
