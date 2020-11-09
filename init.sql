@@ -204,28 +204,6 @@ INSERT INTO `orders` (`id`, `ordersDate`, `accountID`, `total`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
---
-
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `ordersDate` datetime NOT NULL,
-  `accountID` int(10) unsigned NOT NULL,
-  `total` decimal(7,2) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `orders` (`accountID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `ordersDate`, `accountID`, `total`) VALUES
-(1, '2020-11-09 17:37:22', 1, 135.90);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `products`
 --
 
