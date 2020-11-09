@@ -36,10 +36,10 @@
                                     Price
                                 </th>
                                 <th>
-                                    Shipping Time
+                                    Estimated Time
                                 </th>
                                 <th>
-                                    Availability
+                                    Availablity
                                 </th>
                             </tr>
                             <tr class="tablerow">
@@ -53,7 +53,7 @@
                                     3 - 5 working days
                                 </td>
                                 <td>
-                                    <span>Mondays - Fridays</span><br>
+                                    <span>Weekdays only</span><br>
                                     <span>Not available on Public Holidays</span><br>
                                     <span>Within Singapore only</span>
                                 </td>
@@ -67,8 +67,8 @@
                             condition</b>.
                         </p>
                         <p>
-                            To process your return, please contact our customer center at +65 9876 5432 or
-                            f32ee@localhost.
+                            To process your return, please contact our customer center at +65 6666 6666 or
+                            email to f32ee@localhost.
                         </p>
                     </section>
                 </div>

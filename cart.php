@@ -37,7 +37,6 @@
     $qry = $qry . ' AND paid = 0';
     $qry = $qry . ' ORDER BY name, color, size';
     $qry = $qry . ';';
-    echo $qry;
     $query_result = $conn->query($qry);
     $row_no = $query_result->num_rows;
     if ($row_no > 0) {
@@ -96,13 +95,24 @@
         }
 
     }
-    echo '</table>
-    <br><br><h2 style="float:right">Total $<span id="total-price">' . number_format($total, 2) . '</span></h2>';
+    echo '</table>';
+    if ($total){
+    echo'
+    <br><br><h2 style="float:right">Total $<span id="total-price">'
+     . number_format($total, 2) . '</span></h2>';
+    }else{
+        echo '<br><h3 style="float:right">Nothing to Checkout!</h3>';
+    }
     ?>
     </div>
     </div>
     <br>
-    <a href="./checkout.php"><button class="submitbutton" style="max-width: 250px; float: right;"><h4>GO TO CHECKOUT</h4></button></a>
+    <?php if ($total){
+        echo '
+        <button type="submit" class="submitbutton" style="max-width: 250px;
+        float: right; margin-right: 2%"><h4>GO TO CHECKOUT</h4></button>';
+    }
+    ?>
     </form>
     <br><br><br>
     </section>

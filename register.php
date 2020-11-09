@@ -68,7 +68,7 @@
 
 
             $qry .= '");';
-            echo $qry;
+            // echo $qry;
             $query_result = $conn->query($qry);
 
             if (!$query_result || $conn->affected_rows != 1) {

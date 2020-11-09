@@ -116,9 +116,9 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
                     $qry = $qry . ';';
                     $query_result = $conn->query($qry);
-                    echo $qry;
+                    // echo $qry;
                     $updated = $conn->affected_rows;
-                    echo $updated;
+                    // echo $updated;
                     if ($updated < 1) {
                         // if product not in active cart
                         $qry = 'INSERT INTO `carts` (`cartId`, `accountId`, `name`, `category`, `gender`, `color`, `size`, `price`, `discount`, `quantity`, `paid`) VALUES (';
@@ -134,7 +134,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                         $qry = $qry . $input_quantity . ', ';
                         $qry = $qry . '0);';
                         $query_result = $conn->query($qry);
-                        echo $qry;
+                        // echo $qry;
                     }
                 } else {
                     // Add new shopping cart
@@ -163,7 +163,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     $qry = $qry . $input_quantity . ', ';
                     $qry = $qry . '0);';
                     $query_result = $conn->query($qry);
-                    echo $qry;
+                    // echo $qry;
                     if ($query_result) {
                         echo 'Create cart success.';
                     }
@@ -191,24 +191,24 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 
             //Container for color input
             echo '  </div>
-                        <div class="onethird col">
+                        <div class="qtr col" style="max-width: 500px;">
                             <div class="product-preview">
                                  <img id="' . $section_id . '_img_' . $input_id . '" src="./pics/' . $input_id . '_' . $input_color . '.jpg" width="100%">
                             </div>
                         </div>
-                        <div class="qtr col">
+                        <div class="col" style="width: 30%; display: block; min-width: 260px; margin-left: 10px; margin-right: 25px">
                             <form class="product-filters">
                                 <input type="hidden" name="id" value="' . $input_id . '">
                                 <input type="hidden" name="add">
                                 <div id="option--color">
                                     <div>
-                                        <h4>Select color</h4>
+                                        <h3>Select color</h3><hr>
                                     </div>
                                     <div class="row">';
 
             foreach ($distinct_color as $color_name) {
                 echo '  <div class="halfwid col">
-                                <label for="color--' . $color_name . '" class="label label--checkbox">';
+                                <label style="margin: 5px" for="color--' . $color_name . '" class="label label--checkbox">';
 
 
                 if ($color_name == $input_color) {
@@ -221,7 +221,6 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     >';
                 }
 
-
                 echo ucfirst($color_name) .
                     '</label>
                             </div>';
@@ -231,14 +230,14 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             echo '</div>
 						</div>
 						<div id="option--size">
-							<div>
-								<h4>Select size</h4>
+							<div><br>
+								<h3>Select size</h3><hr>
 							</div>
                             <div class="row">';   
             sort($distinct_size);
             foreach ($distinct_size as $size) {
                 echo '<div class="halfwid col">
-                <label for="size--' . $size . '" >';
+                <label style="margin: 5px" for="size--' . $size . '" >';
 
                 if ($size == $input_size) {
                     echo '<input type="radio" name="size" class="input-checkbox" id="size--' . $size . '" value="' . $size . '" checked>';
@@ -246,7 +245,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                     echo '<input type="radio" name="size" class="input-checkbox" id="size--' . $size . '" value="' . $size . '">';
                 }
                 echo $size .
-                    '</label>	
+                    '</label>
                             </div>';
             }
 
@@ -256,7 +255,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 
             //Container for quantity input + submit button
             echo ' <div class="option--quantity" id="option--quantity"' . ($stockout ? ' style="display:none;"' : '') . '>
-							<div>Quantity</div>
+							<div><br><h3>Quantity</h3><hr><br></div>
 							<input type="number" min="1" max="' . $inventory_array[$input_color][$input_size] . '" name="quantity" class="input--text" id="product-quantity" value="' . ($input_quantity > 0 ? $input_quantity : 1) . '">
 						</div>
 						<button type="submit" class="submitbutton"' . ($stockout ? ' style="display:none;"' : '') . '>
@@ -266,7 +265,7 @@ WHERE p.id = ' . $input_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
 					</form>
 				</div>';
             //Display product information
-            echo ' <div class="onethird col">
+            echo ' <div class="col" style="width: 30%">
                             <div class="product-info">
                                 <div>
                                     <h2>' . $name . '</h2><br>

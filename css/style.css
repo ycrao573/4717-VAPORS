@@ -286,11 +286,10 @@ textarea {
 }
 
 .label-filter {
-  margin: 0;
-  display: block;
-  padding-left: 1.75em;
-  text-indent: -1.75em;
   cursor: pointer;
+  display: block;
+  padding-left: 1.48em;
+  text-indent: -1.47em;
 }
 
 .label-filter:not(:nth-last-of-type(1)) {
@@ -352,12 +351,7 @@ textarea {
 }
 
 .product__price--current {
-  color: #666;
-}
-
-.product__price--pre-discount {
-  text-decoration: line-through;
-  color: #678;
+  color: #666666;
 }
 
 .product__color {
@@ -365,51 +359,41 @@ textarea {
 }
 
 .product__color * {
-  width: 1.5rem;
-  height: 0.5rem;
-  margin-right: 0.25rem;
-  margin-bottom: 0.25rem;
-  background: black;
   border: none;
+  border-radius: 1.96px;
+  width: 1.64rem;
+  height: 0.61rem;
+  margin-bottom: 0.24rem;
+  margin-right: 0.05rem;
   cursor: pointer;
-  border-radius: 2px;
 }
 
 .product__color--black {
-  background: #001122;
+  background:black;
 }
 
 .product__color--white {
-  background: #e7e8f3ee;
-}
-
-.product__color--dark-grey {
-  background: rgb(92, 107, 122);
-}
-
-.product__color--grey {
-  background: rgb(156, 171, 187);
-}
-
-.product__color--light-grey {
-  background: #cbccdf;
+  background: rgb(231, 231, 231);
 }
 
 .product__color--orange {
-  background: #e79806;
+  background: #f59f00;
 }
 
 .product__color--yellow {
-  background: #f1ee07;
+  background: #fffb00;
 }
 
+.product__color--brown {
+  background: rgb(190, 133, 0);
+}
 
 .product__color--blue {
-  background: #064686;
+  background: #004d99;
 }
 
 .product__color--pink {
-  background: rgb(240, 139, 215);
+  background: pink;
 }
 
 .product-thumbnails {

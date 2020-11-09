@@ -34,9 +34,7 @@
                                 $email = $_SESSION["email"];
                                 $qry = 'SELECT * FROM accounts AS a WHERE a.email ="' . $email . '";';
                                 $res = $conn->query($qry);
-
                                 $account = $res->fetch_assoc();
-
                                 $id = $account['id'];
                                 $name = $account['name'];
                                 $gender = $account["gender"];
@@ -138,7 +136,7 @@
                                     Subtotal
                                 </th>
                             </tr>';
-                            echo $qry;
+                            // echo $qry;
                     if ($row_no > 0) {
                         for ($i = 0; $i < $row_no; $i++) {
                             $row = $query_result->fetch_assoc();
@@ -191,7 +189,7 @@
                         echo '
                     </div>
                     <button type="submit" class="submitbutton" id="confirm_checkout">
-                        checkout
+                        CHECKOUT
                     </button>
                     <br>';
                     }else{
@@ -201,7 +199,7 @@
                         <br>';
                     }
 
-                    echo $total = $total + 6;
+                    $total = $total + 6;
 
                     if (isset($_POST["checkout"]) && $islogin) {
                         if (isset($_SESSION["email"])) {
@@ -217,7 +215,7 @@
                         // $qry = $qry . ' AND gender = ' . '\'' . $gender . '\'';
                         // $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
                         $qry = $qry . ';';
-                        echo $qry;
+                        // echo $qry;
                         $query_result = $conn->query($qry);
 
                         $orderqry = 'INSERT INTO orders (accountID, ordersDate, total) VALUES(' . $current_id . ', NOW(),"' . $total . '");';

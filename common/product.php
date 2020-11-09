@@ -40,7 +40,7 @@
                 $button_id = $section_id . '_button_' . $product_id . '_' . $color;
                 echo '<button class="product__color--' . $color . '" onclick="pickColor(this)" id="' . $button_id . '"></button>';
                 if ($j == 0) {
-                    echo '<script>initProductImage("' . $button_id . '");</script>';
+                    echo '<script>fetchImg("' . $button_id . '");</script>';
                 }
                 array_push($displayed_colors, $color);
             }
