@@ -77,7 +77,6 @@ INSERT INTO `carts` (`id`, `cartId`, `accountId`, `name`, `category`, `gender`, 
 (1, 1, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 0.00, 2, 0),
 (2, 2, 1, 'Nike MAX 2020', 'BRD', 'M', 'White', 9, 129.90, 10.00, 2, 0),
 (3, 2, 1, 'Nike ZOOM', 'RUN', 'W', 'White', 9, 129.90, 0.00, 2, 0),
-(17, 1, 1, 'Air JORDAN M', 'BAS', 'M', 'Blue', 10, 399.90, 0.00, 1, 0);
 
 -- --------------------------------------------------------
 
