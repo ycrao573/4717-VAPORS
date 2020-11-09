@@ -201,6 +201,8 @@
                         <br>';
                     }
 
+                    echo $total = $total + 6;
+
                     if (isset($_POST["checkout"]) && $islogin) {
                         if (isset($_SESSION["email"])) {
                             $msg = "VAPORS: Thanks for purchasing shoes in VAPORS.";
@@ -217,6 +219,9 @@
                         $qry = $qry . ';';
                         echo $qry;
                         $query_result = $conn->query($qry);
+
+                        $orderqry = 'INSERT INTO orders (accountID, ordersDate, total) VALUES(' . $current_id . ', NOW(),"' . $total . '");';
+                        $conn->query($orderqry);
 
                         echo '<h2 style="color: green">Transaction Successful!</h2><br>';
                         echo '<h3><a href="./index.php">Back to the home page</a></h3>';

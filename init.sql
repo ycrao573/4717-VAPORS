@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `quantity` int(10) unsigned NOT NULL,
   `paid` int(1) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `carts`
@@ -209,6 +209,28 @@ INSERT INTO `products` (`id`, `name`, `category`, `gender`, `description`, `pric
 (6, 'Air JORDAN M', 'BAS', 'M', 'Beyond capable and controllable.', 399.90, 0.00),
 (7, 'Nike MAX SE', 'CAS', 'M', 'Mate on the ground.', 199.90, 0.00),
 (8, 'Nike ZOOM', 'RUN', 'W', 'Running performance, at joy.', 249.90, 0.00);
+
+
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ordersDate` datetime NOT NULL,
+  `accountID` int(10) unsigned NOT NULL,
+  `total` decimal(7,2) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders` (`accountID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `ordersDate`, `accountID`, `total`) VALUES
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
