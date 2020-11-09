@@ -15,10 +15,10 @@
             $password = trim($_POST["password"]);
             $md5password = md5($password);
             $qry = 'SELECT * FROM accounts AS a WHERE a.email ="' . $email . '" AND a.password="' . $md5password . '";';
-            $res = $conn->query($qry);
+            $query_result = $conn->query($qry);
             
-            if($res && $res->num_rows == 1){
-                $account = $res->fetch_assoc();
+            if($query_result && $query_result->num_rows == 1){
+                $account = $query_result->fetch_assoc();
 
                 $id = $account['id'];
                 $name = $account['name'];
@@ -27,7 +27,7 @@
                 $phone = $account["phone"];
                 $postal = $account["postal"];
 
-                $res->free();
+                $query_result->free();
 
                 $_SESSION["name"] = $name;
                 $_SESSION["email"] = $email;      

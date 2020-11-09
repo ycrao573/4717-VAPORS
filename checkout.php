@@ -45,8 +45,7 @@
                             $ship = 'standard';
 
                             $res->free();
-                        } ?>
-                        <?php
+                        } 
                         echo '
                             <label for="name">
                                 Full Name*
@@ -113,14 +112,14 @@
                     array_splice($_SESSION["cart"], 0, sizeof($items));
                     $validCheckout = true;
                 }
-                ?>
-                <div style="float: right; margin: 4%; width: 42%">
+                
+                echo '<div style="float: right; margin: 4%; width: 42%">
                     <div class="invoice">
                         <br>
                         <h3>Order Confirmation</h3><br>
                         <table class="order-confirmation" style="width: 100%">
                             <tr class="tablerow">
-                                <th>
+                            <th>
                                     Item
                                 </th>
                                 <th>
@@ -129,47 +128,95 @@
                                 <th>
                                     Subtotal
                                 </th>
-                            </tr>
-                            <tr class="tablerow">
-                                <td>
-                                    NIKE MAX 2020
-                                </td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    $200.00
-                                </td>
-                            </tr>
+                            </tr>';
 
-                            <tr class="tablerow">
-                                <td></td>
-                                <td>
-                                    <div>Subtotal</div>
-                                    <div>Shipping</div>
-                                    <div>
-                                        <h3>Total</h3>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>$200.00</div>
-                                    <div>$6.00</div>
-                                    <div>$206.00
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                    $qry = 'SELECT * FROM accounts WHERE email = '. '\'' . $_SESSION["email"] . '\'';
+                        $query_result = $conn->query($qry);
+                        $row_no = $query_result->num_rows;
+                        $row = $query_result->fetch_assoc();
+                        $current_id = $row["id"];  
+                        // echo $qry;
+  
+
+                        $qry = 'SELECT * FROM carts WHERE accountId = '. '\'' . $current_id . '\'';
+                        $qry = $qry . ' AND paid = 0';
+                        $qry = $qry . ' ORDER BY name, color, size';
+                        $qry = $qry . ';';
+                        echo $qry;
+                        $query_result = $conn->query($qry);
+                        $row_no = $query_result->num_rows;
+                        if ($row_no > 0) {
+                            for ($counter = 0; $counter < $row_no; $counter++) {
+                                $row = $query_result->fetch_assoc();
+                                $name = $row["name"];
+                                $qry = 'SELECT p.id from products AS p where name = "'.$name .'"';
+                                $res = $conn->query($qry);
+                                $prod = $res->fetch_assoc();
+                                // $productid = ($conn->query($qry)->fetch_assoc())["id"];
+                                $id = $row["id"];
+                                $gender = $row["gender"];
+                                $color = $row["color"];
+                                $size = $row["size"];
+                                $price = $row["price"];
+                                $discount = $row["discount"];
+                                $quantity = $row["quantity"];
+                                
+                                $prices_per_item = (1 - $discount / (float)100) * $price;
+                                $subtotal = $prices_per_item * $quantity;
+                                $total += $subtotal;
+
+                                echo '<tr class="tablerow">';
+                                echo '
+                                <td>' . $name. ' ['. ucfirst($color) . ', '. $size . ']</td>
+                                <td>' . $quantity . '</td>'
+                                ;
+                                echo '<td>'.
+                                    number_format($subtotal, 2) . '
+                                                        </td>
+                                                    </tr>';
+
+                            }
+                        }
+                    echo '
+                    <tr class="tablerow">
+                    <td></td>
+                    <td>
+                        <div>Subtotal</div>
+                        <div>Shipping</div>
+                        <div>
+                            <h3>Total</h3>
+                        </div>
+                    </td>                               
+                    <td>
+                        <div>$' . $total . '</div>
+                        <div>$6.00</div>
+                        <div>$' . ($total + 6) .'
+                        </div>
+                    </td>
+                    </tr>
+                    </table>';
+                    echo '
                     </div>
                     <button type="submit" class="submitbutton" id="confirm_checkout">
                         checkout
                     </button>
-                    <br>
-                    <?php
+                    <br>';
+
                     if (isset($_POST["checkout"]) && $islogin) {
                         if (isset($_SESSION["email"])) {
                             $msg = "VAPORS: Thanks for purchasing shoes in VAPORS.";
                             mail("f32ee@localhost", "VAPORS: Transaction Successful", $msg);
                         }
+
+                        $qry = 'UPDATE carts SET paid = 1 WHERE accountId = ' . $current_id . ' AND paid = 0';
+                        // $qry = $qry . ' AND name = ' . '\'' . $name . '\'';
+                        // $qry = $qry . ' AND lower(color) = ' . '\'' . ucfirst($input_color) . '\'';
+                        // $qry = $qry . ' AND gender = ' . '\'' . $gender . '\'';
+                        // $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
+                        $qry = $qry . ';';
+                        echo $qry;
+                        $query_result = $conn->query($qry);
+
                         echo '<h2 style="color: green">Transaction Successful!</h2><br>';
                         echo '<h3><a href="./index.php">Back to the home page</a></h3>';
                         echo '<br><h4>Confirmation Email Sent! <a href="https://192.168.56.2:20000">Check Here</a></h4>';
@@ -186,5 +233,4 @@
     include './common/copyright.php';
     ?>
 </body>
-
 </html>

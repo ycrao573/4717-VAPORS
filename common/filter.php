@@ -1,4 +1,4 @@
-<section class="sidebar" style="margin: 25px; padding: 20px; border-radius: 20px; background-color: lightgrey; max-width: 350px;">
+<section class="sidebar" style="max-height: 689px; margin: 25px; padding: 15px; border-radius: 20px; background-color: lightgrey;">
 	<form class="filter">
 		<div>
 			<h2>Filter</h2>
