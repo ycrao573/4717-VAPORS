@@ -147,7 +147,7 @@
                             $res = $conn->query($qry);
                             $prod = $res->fetch_assoc();
                             // $productid = ($conn->query($qry)->fetch_assoc())["id"];
-                            $id = $row["id"];
+                            $id = $prod["id"];
                             $gender = $row["gender"];
                             $color = $row["color"];
                             $size = $row["size"];
@@ -216,6 +216,7 @@
                         $qry = $qry . ' AND paid = 0';
                         $qry = $qry . ' ORDER BY name, color, size';
                         $qry = $qry . ';';
+                        echo $qry;
 
                         $query_result = $conn->query($qry);
                         $row_no = $query_result->num_rows;
@@ -228,7 +229,7 @@
                                 $res = $conn->query($qry);
                                 $prod = $res->fetch_assoc();
                                 // $productid = ($conn->query($qry)->fetch_assoc())["id"];
-                                $id = $row["id"];
+                                $id = $prod["id"];
                                 $gender = $row["gender"];
                                 $color = $row["color"];
                                 $size = $row["size"];
@@ -239,12 +240,12 @@
                                 $prices_per_item = (1 - $discount / (float)100) * $price;
                                 $subtotal = $prices_per_item * $quantity;
                                 
-                                $qry = 'UPDATE inventory SET stock = stock -' . $quantity . ' WHERE color = ' . $color;
+                                $qry = 'UPDATE inventory SET stock = stock -' . $quantity . ', sale = sale +' . $quantity . ' WHERE size = ' . $size;
                                 $qry = $qry . ' AND productID = ' . '\'' . $id . '\'';
-                                $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
+                                $qry = $qry . ' AND color = ' . '\'' . $color . '\'';
                                 $qry = $qry . ';';
                                 echo $qry;
-                                $query_result = $conn->query($qry);
+                                $update_query_result = $conn->query($qry);
                             }
                         }
 
