@@ -97,14 +97,14 @@
 
     }
     echo '</table>
-    <h4 class="header"><strong>Total $<span id="total-price">' . number_format($total, 2) . '</span></strong></h4>';
+    <br><br><h2 style="float:right">Total $<span id="total-price">' . number_format($total, 2) . '</span></h2>';
     ?>
     </div>
     </div>
-    <br><br><br><br><br><br>
-    <a href="./checkout.php"><button class="submitbutton" style="max-width: 200px; float: right;">Go to Checkout</button></a>
+    <br><br><br>
+    <a href="./checkout.php"><button class="submitbutton" style="max-width: 250px; float: right;"><h4>GO TO CHECKOUT</h4></button></a>
     </form>
-    <br><br><br><br>
+    <br><br><br>
     </section>
 
 </body>

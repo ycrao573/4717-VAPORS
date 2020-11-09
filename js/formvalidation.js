@@ -84,5 +84,3 @@ validateUser = () => validateEmail() && validatePwd() && validateSecPwd();
 validateLogin = () => validateEmail() && validatePwd();
 
 validateRegister = () => validateUser() && validateName();
-
-validateCheckout = () => validateName() && validatePhone() && validateAddress() && validatePostalCode();

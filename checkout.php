@@ -137,7 +137,7 @@
                         $current_id = $row["id"];  
                         // echo $qry;
   
-
+                        $cancheckout = false;
                         $qry = 'SELECT * FROM carts WHERE accountId = '. '\'' . $current_id . '\'';
                         $qry = $qry . ' AND paid = 0';
                         $qry = $qry . ' ORDER BY name, color, size';
@@ -146,7 +146,7 @@
                         $query_result = $conn->query($qry);
                         $row_no = $query_result->num_rows;
                         if ($row_no > 0) {
-                            for ($counter = 0; $counter < $row_no; $counter++) {
+                            for ($i = 0; $i < $row_no; $i++) {
                                 $row = $query_result->fetch_assoc();
                                 $name = $row["name"];
                                 $qry = 'SELECT p.id from products AS p where name = "'.$name .'"';
@@ -174,8 +174,11 @@
                                     number_format($subtotal, 2) . '
                                                         </td>
                                                     </tr>';
-
+                                                    
                             }
+                        }else{
+                            echo '<br><h3>Nothing to checkout!</h3>';
+                            $cancheckout = false;
                         }
                     echo '
                     <tr class="tablerow">

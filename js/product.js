@@ -1,14 +1,14 @@
-function pickColor(e) {
-    var elementId = e.getAttribute("id");
-    var sepId = elementId.split("_");
-    var sepIdLength = sepId.length;
-    var color = sepId[sepIdLength - 1];
-    var productId = sepId[sepIdLength - 2];
-    var imgElement = document.getElementById(sepId[0] + "_img_" + productId);
-    imgElement.src = "./pics/" + productId + "_" + color + ".jpg";
+pickColor = (e) => {
+    var eid = e.getAttribute("id");
+    var splitId = eid.split("_");
+    var splitIdLen = splitId.length;
+    var color = splitId[splitIdLen - 1];
+    var productId = splitId[splitIdLen - 2];
+    var imageName = document.getElementById(splitId[0] + "_img_" + productId);
+    imageName.src = "./pics/" + productId + "_" + color + ".jpg";
 }
 
-function initProductImage(button_id) {
-    var element = document.getElementById(button_id);
-    pickColor(element);
+initProductImage = (button_id) => {
+    var e = document.getElementById(button_id);
+    pickColor(e);
 }
