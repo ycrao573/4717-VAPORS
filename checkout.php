@@ -145,7 +145,7 @@
                             $res = $conn->query($qry);
                             $prod = $res->fetch_assoc();
                             // $productid = ($conn->query($qry)->fetch_assoc())["id"];
-                            $id = $row["id"];
+                            $id = $prod["id"];
                             $gender = $row["gender"];
                             $color = $row["color"];
                             $size = $row["size"];
@@ -209,11 +209,46 @@
                         $msg = "VAPORS: New transaction from " . $name . " received";
                         mail("f32ee@localhost", "VAPORS: New Transaction", $msg);
 
+                        // Update inventory item by item
+                        $qry = 'SELECT * FROM carts WHERE accountId = ' . '\'' . $current_id . '\'';
+                        $qry = $qry . ' AND paid = 0';
+                        $qry = $qry . ' ORDER BY name, color, size';
+                        $qry = $qry . ';';
+                        echo $qry;
+
+                        $query_result = $conn->query($qry);
+                        $row_no = $query_result->num_rows;
+                        
+                        if ($row_no > 0) {
+                            for ($i = 0; $i < $row_no; $i++) {
+                                $row = $query_result->fetch_assoc();
+                                $name = $row["name"];
+                                $qry = 'SELECT p.id from products AS p where name = "' . $name . '"';
+                                $res = $conn->query($qry);
+                                $prod = $res->fetch_assoc();
+                                // $productid = ($conn->query($qry)->fetch_assoc())["id"];
+                                $id = $prod["id"];
+                                $gender = $row["gender"];
+                                $color = $row["color"];
+                                $size = $row["size"];
+                                $price = $row["price"];
+                                $discount = $row["discount"];
+                                $quantity = $row["quantity"];
+    
+                                $prices_per_item = (1 - $discount / (float)100) * $price;
+                                $subtotal = $prices_per_item * $quantity;
+                                
+                                $qry = 'UPDATE inventory SET stock = stock -' . $quantity . ', sale = sale +' . $quantity . ' WHERE size = ' . $size;
+                                $qry = $qry . ' AND productID = ' . '\'' . $id . '\'';
+                                $qry = $qry . ' AND color = ' . '\'' . $color . '\'';
+                                $qry = $qry . ';';
+                                echo $qry;
+                                $update_query_result = $conn->query($qry);
+                            }
+                        }
+
+                        // Update cart
                         $qry = 'UPDATE carts SET paid = 1 WHERE accountId = ' . $current_id . ' AND paid = 0';
-                        // $qry = $qry . ' AND name = ' . '\'' . $name . '\'';
-                        // $qry = $qry . ' AND lower(color) = ' . '\'' . ucfirst($input_color) . '\'';
-                        // $qry = $qry . ' AND gender = ' . '\'' . $gender . '\'';
-                        // $qry = $qry . ' AND size = ' . '\'' . $input_size . '\'';
                         $qry = $qry . ';';
                         // echo $qry;
                         $query_result = $conn->query($qry);
