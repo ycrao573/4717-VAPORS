@@ -101,7 +101,7 @@
     ?>
     </div>
     </div>
-    <br><br><br>
+    <br>
     <a href="./checkout.php"><button class="submitbutton" style="max-width: 250px; float: right;"><h4>GO TO CHECKOUT</h4></button></a>
     </form>
     <br><br><br>
