@@ -138,20 +138,6 @@
 				</div>
 
 				<div class="onethird col">
-					<label for="color-green" class="label-filter">
-						<input type="checkbox" name="color[]" value="Green" class="input-checkbox" id="color-green">
-						Green
-					</label>
-				</div>
-
-				<div class="onethird col">
-					<label for="color-grey" class="label-filter">
-						<input type="checkbox" name="color[]" value="Grey" class="input-checkbox" id="color-grey">
-						Grey
-					</label>
-				</div>
-
-				<div class="onethird col">
 					<label for="color-orange" class="label-filter">
 						<input type="checkbox" name="color[]" value="Orange" class="input-checkbox" id="color-orange">
 						Orange
@@ -165,12 +151,6 @@
 					</label>
 				</div>
 
-				<div class="onethird col">
-					<label for="color-red" class="label-filter">
-						<input type="checkbox" name="color[]" value="Red" class="input-checkbox" id="color-red">
-						Red
-					</label>
-				</div>
 				<div class="onethird col">
 					<label for="color-white" class="label-filter">
 						<input type="checkbox" name="color[]" value="White" class="input-checkbox" id="color-white">

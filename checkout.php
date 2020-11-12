@@ -41,7 +41,6 @@
                                 $address = $account["address"];
                                 $phone = $account["phone"];
                                 $postal = $account["postal"];
-                                $ship = 'standard';
 
                                 $res->free();
                             }

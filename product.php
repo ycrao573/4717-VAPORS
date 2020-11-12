@@ -56,10 +56,10 @@ WHERE p.id = ' . $get_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
             $name = stripslashes($row["name"]);
             $price = $row["price"];
             $discount = $row["discount"];
-            $discounted_price =  $price * (1 - $product_discount / (float)100);
+            $res_price =  $price * (1 - $discount / (float)100);
             $gender = $row["gender"];
             $category = $row["category"];
-            $description = stripslashes($row["description"]);
+            $info = stripslashes($row["description"]);
 
             if (!$get_color || !in_array($get_color, $listcolor)) {
                 // default display color
@@ -260,11 +260,11 @@ WHERE p.id = ' . $get_id . ' AND p.id = i.productID ORDER BY i.color ASC;';
                                     <h2>' . $name . '</h2><br>
                                 </div>
                                 <div>
-                                    <h2>$' . number_format($discounted_price, 2) . '</h2>';
+                                    <h2>$' . number_format($res_price, 2) . '</h2>';
 
             echo '          </div>
                                 <div class="product-info__description"><br>' .
-                nl2br($description) .
+                nl2br($info) .
                 '</div>
                             </div>
                         </div>
